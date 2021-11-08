@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-11-08T04:31:05.534Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36" etag="8x6qDOEZO1bZwggvjJkZ" version="15.7.0" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2021-11-08T04:32:55.225Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36" etag="Zk9rmxjduuPQosO9AzeF" version="15.7.0" type="github" pages="3">
   <diagram id="iCsR_CdoxigqwUeFAkIc" name="Server UML Diagram">
     <mxGraphModel dx="740" dy="550" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -97,7 +97,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="IvxxioDr8btIqRhFtRrR-0" value="BaccaratInfo" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="oPg8867OzfuqyguofIma-1">
-          <mxGeometry x="140" y="710" width="220" height="90" as="geometry" />
+          <mxGeometry x="140" y="745" width="220" height="90" as="geometry" />
         </mxCell>
         <mxCell id="IvxxioDr8btIqRhFtRrR-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="IvxxioDr8btIqRhFtRrR-0">
           <mxGeometry y="26" width="220" height="24" as="geometry" />
@@ -109,7 +109,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="CT1m77pq0zXfNrRqhKED" name="Client Wireframe">
-    <mxGraphModel dx="1480" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2467" dy="1833" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="RWVcYVp_fBFJSYoEF-UK-0" />
         <mxCell id="RWVcYVp_fBFJSYoEF-UK-1" parent="RWVcYVp_fBFJSYoEF-UK-0" />
@@ -136,6 +136,9 @@
         </mxCell>
         <mxCell id="Acb2LCIVxRlWv7irZKGu-0" value="Connect to Server" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="9T0DZEzoygLwlel3mVKB-0">
           <mxGeometry x="205" y="405" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="1uVGcpjj7upnIgS1fv5H-1" value="on click, connect to server + move to game play screen&lt;br&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="9T0DZEzoygLwlel3mVKB-0">
+          <mxGeometry x="390" y="435" width="100" height="30" as="geometry" />
         </mxCell>
         <mxCell id="9T0DZEzoygLwlel3mVKB-1" value="Game Scene" style="swimlane;" parent="RWVcYVp_fBFJSYoEF-UK-1" vertex="1">
           <mxGeometry x="1100" y="620" width="690" height="700" as="geometry" />
@@ -208,6 +211,12 @@
         </mxCell>
         <mxCell id="Acb2LCIVxRlWv7irZKGu-40" value="once start button is clicked, program will send bet info to server + display cards for banker &amp;amp; player&amp;nbsp;&amp;nbsp;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="RWVcYVp_fBFJSYoEF-UK-1">
           <mxGeometry x="1670" y="1340" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="1uVGcpjj7upnIgS1fv5H-0" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="RWVcYVp_fBFJSYoEF-UK-1" source="Acb2LCIVxRlWv7irZKGu-7">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="980" y="1050" as="sourcePoint" />
+            <mxPoint x="1070" y="1000" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
