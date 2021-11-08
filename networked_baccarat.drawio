@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-11-08T04:32:55.225Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36" etag="Zk9rmxjduuPQosO9AzeF" version="15.7.0" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2021-11-08T05:00:47.877Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36" etag="PZ1xvRG3phEgjU65y5K3" version="15.7.0" type="github" pages="3">
   <diagram id="iCsR_CdoxigqwUeFAkIc" name="Server UML Diagram">
-    <mxGraphModel dx="740" dy="550" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1892" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -79,11 +79,14 @@
             <mxPoint x="636" y="510" as="targetPoint" />
           </mxGeometry>
         </mxCell>
+        <mxCell id="pmx6w-X1Y5QTXCpeYIxl-1" value="&lt;font style=&quot;font-size: 36px&quot;&gt;Server UML Diagram&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="315" y="110" width="220" height="70" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram id="OC684Z58dfQ8_XJj_3_0" name="Client UML Diagram">
-    <mxGraphModel dx="740" dy="550" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="946" dy="550" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="oPg8867OzfuqyguofIma-0" />
         <mxCell id="oPg8867OzfuqyguofIma-1" parent="oPg8867OzfuqyguofIma-0" />
@@ -105,16 +108,19 @@
         <mxCell id="IvxxioDr8btIqRhFtRrR-4" value="+ setBetOn: public string  " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="IvxxioDr8btIqRhFtRrR-0">
           <mxGeometry y="50" width="220" height="40" as="geometry" />
         </mxCell>
+        <mxCell id="wtnxFb0Ht04isCcu3gVi-0" value="&lt;font style=&quot;font-size: 36px&quot;&gt;Client UML Diagram&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" vertex="1" parent="oPg8867OzfuqyguofIma-1">
+          <mxGeometry x="315" y="490" width="220" height="70" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram id="CT1m77pq0zXfNrRqhKED" name="Client Wireframe">
-    <mxGraphModel dx="2467" dy="1833" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1577" dy="917" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="RWVcYVp_fBFJSYoEF-UK-0" />
         <mxCell id="RWVcYVp_fBFJSYoEF-UK-1" parent="RWVcYVp_fBFJSYoEF-UK-0" />
         <mxCell id="9T0DZEzoygLwlel3mVKB-0" value="Intro Scene" style="swimlane;" parent="RWVcYVp_fBFJSYoEF-UK-1" vertex="1">
-          <mxGeometry x="180" y="620" width="520" height="690" as="geometry" />
+          <mxGeometry x="200" y="620" width="520" height="690" as="geometry" />
         </mxCell>
         <mxCell id="9T0DZEzoygLwlel3mVKB-6" value="&lt;font style=&quot;font-size: 25px&quot;&gt;&lt;b&gt;Welcome to Baccarat!&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="9T0DZEzoygLwlel3mVKB-0" vertex="1">
           <mxGeometry x="70" y="130" width="390" height="100" as="geometry" />
@@ -140,8 +146,17 @@
         <mxCell id="1uVGcpjj7upnIgS1fv5H-1" value="on click, connect to server + move to game play screen&lt;br&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="9T0DZEzoygLwlel3mVKB-0">
           <mxGeometry x="390" y="435" width="100" height="30" as="geometry" />
         </mxCell>
+        <mxCell id="v5XmzHUVLappD_w8zOyM-1" value="set prompt text for text boxes&amp;nbsp;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="9T0DZEzoygLwlel3mVKB-0">
+          <mxGeometry x="380" y="315" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="v5XmzHUVLappD_w8zOyM-2" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.2;entryY=0.833;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="9T0DZEzoygLwlel3mVKB-0" source="Acb2LCIVxRlWv7irZKGu-5" target="v5XmzHUVLappD_w8zOyM-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="350" y="420" as="sourcePoint" />
+            <mxPoint x="400" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="9T0DZEzoygLwlel3mVKB-1" value="Game Scene" style="swimlane;" parent="RWVcYVp_fBFJSYoEF-UK-1" vertex="1">
-          <mxGeometry x="1100" y="620" width="690" height="700" as="geometry" />
+          <mxGeometry x="1090" y="620" width="690" height="700" as="geometry" />
         </mxCell>
         <mxCell id="Acb2LCIVxRlWv7irZKGu-29" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4C3;" vertex="1" parent="9T0DZEzoygLwlel3mVKB-1">
           <mxGeometry x="487" y="608" width="80" height="40" as="geometry" />
@@ -194,6 +209,9 @@
         <mxCell id="Acb2LCIVxRlWv7irZKGu-35" value="Results" style="swimlane;fillColor=#FFFFFF;" vertex="1" parent="9T0DZEzoygLwlel3mVKB-1">
           <mxGeometry x="380" y="50" width="235" height="70" as="geometry" />
         </mxCell>
+        <mxCell id="v5XmzHUVLappD_w8zOyM-4" value="*list view of all game results, every result will be it&#39;s own entry&amp;nbsp;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="Acb2LCIVxRlWv7irZKGu-35">
+          <mxGeometry x="15" y="30" width="205" height="30" as="geometry" />
+        </mxCell>
         <mxCell id="Acb2LCIVxRlWv7irZKGu-36" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4C3;" vertex="1" parent="9T0DZEzoygLwlel3mVKB-1">
           <mxGeometry x="580" y="608" width="80" height="40" as="geometry" />
         </mxCell>
@@ -202,6 +220,9 @@
         </mxCell>
         <mxCell id="Acb2LCIVxRlWv7irZKGu-38" value="current user winnings displayed here&amp;nbsp;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="9T0DZEzoygLwlel3mVKB-1">
           <mxGeometry x="60" y="613" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="v5XmzHUVLappD_w8zOyM-3" value="display cards&lt;br&gt;here&amp;nbsp;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="9T0DZEzoygLwlel3mVKB-1">
+          <mxGeometry x="205" y="430" width="30" height="30" as="geometry" />
         </mxCell>
         <mxCell id="Acb2LCIVxRlWv7irZKGu-39" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="RWVcYVp_fBFJSYoEF-UK-1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -217,6 +238,9 @@
             <mxPoint x="980" y="1050" as="sourcePoint" />
             <mxPoint x="1070" y="1000" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="jQoIU7FrBRAhWt8SivFe-0" value="&lt;font style=&quot;font-size: 36px&quot;&gt;Client GUI Wireframe&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" vertex="1" parent="RWVcYVp_fBFJSYoEF-UK-1">
+          <mxGeometry x="810" y="380" width="220" height="70" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
