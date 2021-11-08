@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-11-08T04:21:05.919Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36" etag="cS7Ey6QE4ORUdOD9-7KB" version="15.7.0" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2021-11-08T04:31:05.534Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36" etag="8x6qDOEZO1bZwggvjJkZ" version="15.7.0" type="github" pages="3">
   <diagram id="iCsR_CdoxigqwUeFAkIc" name="Server UML Diagram">
-    <mxGraphModel dx="1038" dy="550" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="740" dy="550" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -17,7 +17,7 @@
           <mxGeometry y="118" width="220" height="50" as="geometry" />
         </mxCell>
         <mxCell id="4a9U-WU0iI5Y7Coj8OM2-9" value="BaccaratGameLogic" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
-          <mxGeometry x="410" y="270" width="390" height="160" as="geometry" />
+          <mxGeometry x="410" y="270" width="390" height="176" as="geometry" />
         </mxCell>
         <mxCell id="4a9U-WU0iI5Y7Coj8OM2-31" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;entryX=0.546;entryY=-0.025;entryDx=0;entryDy=0;entryPerimeter=0;" parent="4a9U-WU0iI5Y7Coj8OM2-9" target="4a9U-WU0iI5Y7Coj8OM2-17" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
@@ -26,10 +26,10 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="4a9U-WU0iI5Y7Coj8OM2-11" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="4a9U-WU0iI5Y7Coj8OM2-9" vertex="1">
-          <mxGeometry y="26" width="390" height="8" as="geometry" />
+          <mxGeometry y="26" width="390" height="24" as="geometry" />
         </mxCell>
         <mxCell id="4a9U-WU0iI5Y7Coj8OM2-12" value="+ whoWon(ArrayList&lt;Card&gt; hand1, ArrayList&lt;Card&gt;&#xa;hand2): public static String&#xa;+ handTotal (ArrayList&lt;Card&gt; hand): public static int &#xa;+ evaluateBankerDraw (ArrayList&lt;Card&gt; hand, Card playerCard): &#xa;public static boolean &#xa;+ evaluatePlayerDraw (ArrayList&lt;Card&gt; hand): public static boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="4a9U-WU0iI5Y7Coj8OM2-9" vertex="1">
-          <mxGeometry y="34" width="390" height="126" as="geometry" />
+          <mxGeometry y="50" width="390" height="126" as="geometry" />
         </mxCell>
         <mxCell id="4a9U-WU0iI5Y7Coj8OM2-13" value="BaccaratDealer" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
           <mxGeometry x="130" y="524" width="220" height="160" as="geometry" />
@@ -79,29 +79,32 @@
             <mxPoint x="636" y="510" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="zEhGB48hmVTYjzrObQU9-6" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;Serializable&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" parent="1" vertex="1">
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="OC684Z58dfQ8_XJj_3_0" name="Client UML Diagram">
+    <mxGraphModel dx="740" dy="550" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="oPg8867OzfuqyguofIma-0" />
+        <mxCell id="oPg8867OzfuqyguofIma-1" parent="oPg8867OzfuqyguofIma-0" />
+        <mxCell id="0IyHmp6XAa4bjyS2euzH-0" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;Serializable&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px ; margin-left: 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" vertex="1" parent="oPg8867OzfuqyguofIma-1">
           <mxGeometry x="480" y="760" width="190" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="zEhGB48hmVTYjzrObQU9-7" value="BaccaratInfo" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
-          <mxGeometry x="140" y="770" width="220" height="34" as="geometry" />
-        </mxCell>
-        <mxCell id="zEhGB48hmVTYjzrObQU9-10" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="zEhGB48hmVTYjzrObQU9-7" vertex="1">
-          <mxGeometry y="26" width="220" height="8" as="geometry" />
-        </mxCell>
-        <mxCell id="zEhGB48hmVTYjzrObQU9-12" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;rounded=0;" parent="1" edge="1">
+        <mxCell id="0IyHmp6XAa4bjyS2euzH-3" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;rounded=0;" edge="1" parent="oPg8867OzfuqyguofIma-1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="360" y="789.5" as="sourcePoint" />
             <mxPoint x="480" y="790" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-      </root>
-    </mxGraphModel>
-  </diagram>
-  <diagram id="OC684Z58dfQ8_XJj_3_0" name="Client UML Diagram">
-    <mxGraphModel dx="1038" dy="550" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
-      <root>
-        <mxCell id="oPg8867OzfuqyguofIma-0" />
-        <mxCell id="oPg8867OzfuqyguofIma-1" parent="oPg8867OzfuqyguofIma-0" />
+        <mxCell id="IvxxioDr8btIqRhFtRrR-0" value="BaccaratInfo" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="oPg8867OzfuqyguofIma-1">
+          <mxGeometry x="140" y="710" width="220" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="IvxxioDr8btIqRhFtRrR-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="IvxxioDr8btIqRhFtRrR-0">
+          <mxGeometry y="26" width="220" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="IvxxioDr8btIqRhFtRrR-4" value="+ setBetOn: public string  " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="IvxxioDr8btIqRhFtRrR-0">
+          <mxGeometry y="50" width="220" height="40" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
