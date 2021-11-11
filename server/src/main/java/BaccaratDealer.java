@@ -5,8 +5,9 @@ import java.util.Random;
 
 public class BaccaratDealer {
 
-    ArrayList<Card> deck = new Card[52];
-    ArrayList<String> suites;
+    ArrayList<Card> deck = new ArrayList<Card>();
+    ArrayList<String> suites = new ArrayList<String>();
+
 
     //generateDeck will generate a new standard 52 card deck where each card is an
     //instance of the Card class in the ArrayList<Card> deck.
@@ -18,13 +19,13 @@ public class BaccaratDealer {
         suites.add("Spades");
 
         //total cards
-        for (int i = 0; i < deck.length; i++){
-            //suite values
-            for (int j = 0; j < suites.length; j++){
-                //add int values
+        int cardCount = 0;
+        while (cardCount < 52){
+            for (int j = 0; j < suites.size(); j++){
                 for (int k = 1; k < 14; k++){
-                    //create card and link with deck list
-                    deck[i] = new Card(suites[j],k)
+                    Card c = new Card(suites.get(j), k);
+                    deck.add(c);
+                    cardCount++;
                 }
             }
         }
@@ -34,21 +35,22 @@ public class BaccaratDealer {
     //dealHand will deal two cards
     //and return them in an ArrayList<Card>
     public ArrayList<Card> dealHand(){
-        ArrayList<Card> hand = new ArrayList<>(2);
+        ArrayList<Card> hand = new ArrayList<Card>();
         shuffleDeck();
-        hand.add(deck.size - 1); //add last card in shuffled deck
-        deck.remove(deck.size - 1); //remove card from deck
-        hand.add(deck.size - 1);
-        deck.remove(deck.size - 1);
+        hand.add(deck.get(deck.size() - 1)); //add last card in shuffled deck
+        deck.remove(deck.size() - 1); //remove card from deck
+        hand.add(deck.get(deck.size() - 1));
+        deck.remove(deck.size() - 1);
+        System.out.println(hand);
+        return hand;
+
     };
 
     //drawOne will deal a single card and return it.
     public Card drawOne(){
         Random rand = new Random();
         int num = rand.nextInt(52); //gets random integer
-        Card drawedCard = deck[num];
-        deck.remove(deck[num]);
-        return drawedCard //do we delete card from deck after it's been returned?
+        return deck.get(num); //do we delete card from deck after it's been returned?
 
     };
 
@@ -60,7 +62,7 @@ public class BaccaratDealer {
 
     // deckSize will just return how many cards are in this.deck at any given time.
     public int deckSize(){
-        return this.deck.length;
+        return this.deck.size();
     };
 
 

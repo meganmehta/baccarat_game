@@ -13,8 +13,16 @@ public class Card {
         this.suite = suiteVal;
     }
 
-    public void setValue(String numVal) {
+    public void setValue(int numVal) {
         this.value = numVal;
+    }
+
+    public void getSuite() {
+        this.suite;
+    }
+
+    public void getValue() {
+        this.value;
     }
 
 }
