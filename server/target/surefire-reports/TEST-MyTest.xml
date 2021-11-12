@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="MyTest" time="0.027" tests="4" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="MyTest" time="0.039" tests="18" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="16"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/usr/local/Cellar/openjdk/16.0.2/libexec/openjdk.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/meganmehta/Downloads/baccarat_game/server/target/surefire/surefirebooter2433998842647978008.jar /Users/meganmehta/Downloads/baccarat_game/server/target/surefire 2021-11-11T13-03-23_778-jvmRun1 surefire1945190265380680604tmp surefire_016000378775943270546tmp"/>
+    <property name="sun.java.command" value="/Users/meganmehta/Downloads/baccarat_game/server/target/surefire/surefirebooter810134467266806170.jar /Users/meganmehta/Downloads/baccarat_game/server/target/surefire 2021-11-11T21-17-34_171-jvmRun1 surefire5863276259129489238tmp surefire_02779120724664114434tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/meganmehta/Downloads/baccarat_game/server/target/test-classes:/Users/meganmehta/Downloads/baccarat_game/server/target/classes:/Users/meganmehta/.m2/repository/org/junit/jupiter/junit-jupiter/5.6.2/junit-jupiter-5.6.2.jar:/Users/meganmehta/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.6.2/junit-jupiter-api-5.6.2.jar:/Users/meganmehta/.m2/repository/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar:/Users/meganmehta/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/Users/meganmehta/.m2/repository/org/junit/platform/junit-platform-commons/1.6.2/junit-platform-commons-1.6.2.jar:/Users/meganmehta/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.6.2/junit-jupiter-params-5.6.2.jar:/Users/meganmehta/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.6.2/junit-jupiter-engine-5.6.2.jar:/Users/meganmehta/.m2/repository/org/junit/platform/junit-platform-engine/1.6.2/junit-platform-engine-1.6.2.jar:/Users/meganmehta/.m2/repository/org/openjfx/javafx-controls/12.0.1/javafx-controls-12.0.1.jar:/Users/meganmehta/.m2/repository/org/openjfx/javafx-controls/12.0.1/javafx-controls-12.0.1-mac.jar:/Users/meganmehta/.m2/repository/org/openjfx/javafx-graphics/12.0.1/javafx-graphics-12.0.1.jar:/Users/meganmehta/.m2/repository/org/openjfx/javafx-graphics/12.0.1/javafx-graphics-12.0.1-mac.jar:/Users/meganmehta/.m2/repository/org/openjfx/javafx-base/12.0.1/javafx-base-12.0.1.jar:/Users/meganmehta/.m2/repository/org/openjfx/javafx-base/12.0.1/javafx-base-12.0.1-mac.jar:/Users/meganmehta/.m2/repository/org/openjfx/javafx-fxml/12/javafx-fxml-12.jar:/Users/meganmehta/.m2/repository/org/openjfx/javafx-fxml/12/javafx-fxml-12-mac.jar:"/>
@@ -28,7 +28,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="surefire.real.class.path" value="/Users/meganmehta/Downloads/baccarat_game/server/target/surefire/surefirebooter2433998842647978008.jar"/>
+    <property name="surefire.real.class.path" value="/Users/meganmehta/Downloads/baccarat_game/server/target/surefire/surefirebooter810134467266806170.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="16.0.2+0"/>
@@ -56,6 +56,20 @@
   </properties>
   <testcase name="generateDeckTest1" classname="MyTest" time="0.016"/>
   <testcase name="generateDeckTest2" classname="MyTest" time="0.002"/>
+  <testcase name="whoWonTest1" classname="MyTest" time="0.001"/>
+  <testcase name="whoWonTest2" classname="MyTest" time="0.001"/>
+  <testcase name="handTotalTest1" classname="MyTest" time="0"/>
+  <testcase name="handTotalTest2" classname="MyTest" time="0.001"/>
+  <testcase name="shuffleDeckTest1" classname="MyTest" time="0.001"/>
+  <testcase name="shuffleDeckTest2" classname="MyTest" time="0"/>
   <testcase name="dealHandTest1" classname="MyTest" time="0.001"/>
   <testcase name="dealHandTest2" classname="MyTest" time="0.001"/>
+  <testcase name="evaluatePlayerDrawTest1" classname="MyTest" time="0"/>
+  <testcase name="evaluatePlayerDrawTest2" classname="MyTest" time="0"/>
+  <testcase name="evaluateBankerDrawTest1" classname="MyTest" time="0.001"/>
+  <testcase name="evaluateBankerDrawTest2" classname="MyTest" time="0.001"/>
+  <testcase name="drawOneTest1" classname="MyTest" time="0"/>
+  <testcase name="drawOneTest2" classname="MyTest" time="0.001"/>
+  <testcase name="deckSizeTest1" classname="MyTest" time="0.001"/>
+  <testcase name="deckSizeTest2" classname="MyTest" time="0.001"/>
 </testsuite>

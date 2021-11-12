@@ -6,24 +6,24 @@ import java.util.Random;
 public class BaccaratDealer {
 
     ArrayList<Card> deck = new ArrayList<Card>();
-    ArrayList<String> suites = new ArrayList<String>();
+    ArrayList<String> suits = new ArrayList<String>();
 
 
     //generateDeck will generate a new standard 52 card deck where each card is an
     //instance of the Card class in the ArrayList<Card> deck.
     public void generateDeck(){
-        //add suite values to list
-        suites.add("Clubs");
-        suites.add("Diamonds");
-        suites.add("Hearts");
-        suites.add("Spades");
+        //add suit values to list
+        suits.add("Clubs");
+        suits.add("Diamonds");
+        suits.add("Hearts");
+        suits.add("Spades");
 
         //total cards
         int cardCount = 0;
         while (cardCount < 52){
-            for (int j = 0; j < suites.size(); j++){
+            for (int j = 0; j < suits.size(); j++){
                 for (int k = 1; k < 14; k++){
-                    Card c = new Card(suites.get(j), k);
+                    Card c = new Card(suits.get(j), k);
                     deck.add(c);
                     cardCount++;
                 }
@@ -41,7 +41,6 @@ public class BaccaratDealer {
         deck.remove(deck.size() - 1); //remove card from deck
         hand.add(deck.get(deck.size() - 1));
         deck.remove(deck.size() - 1);
-        System.out.println(hand);
         return hand;
 
     };
@@ -50,7 +49,9 @@ public class BaccaratDealer {
     public Card drawOne(){
         Random rand = new Random();
         int num = rand.nextInt(52); //gets random integer
-        return deck.get(num); //do we delete card from deck after it's been returned?
+        Card returnCard = deck.get(num);
+        deck.remove(num);
+        return returnCard; //do we delete card from deck after it's been returned?
 
     };
 

@@ -1,28 +1,28 @@
 import java.lang.String;
 
 public class Card {
-    String suite;
+    String suit;
     int value;
 
-    public Card(String theSuite, int theValue){
-        this.suite = theSuite;
+    public Card(String theSuit, int theValue){
+        this.suit = theSuit;
         this.value = theValue;
     }
 
-    public void setSuite(String suiteVal) {
-        this.suite = suiteVal;
+    public void setSuit(String suitVal) {
+        this.suit = suitVal;
     }
 
     public void setValue(int numVal) {
         this.value = numVal;
     }
 
-    public void getSuite() {
-        this.suite;
+    public String getSuit() {
+        return this.suit;
     }
 
-    public void getValue() {
-        this.value;
+    public int getValue() {
+       return this.value;
     }
 
 }
