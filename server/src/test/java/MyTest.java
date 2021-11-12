@@ -208,27 +208,36 @@ class MyTest {
 	//testing BaccaratGame - TODO!
 	@Test
 	void evaluateWinningsTest1()  {
-		Card h1testCard1 = new Card("Spades", 3);
-		Card h1testCard2 = new Card("Clubs", 3);
-		ArrayList<Card> testHand1 = new ArrayList<Card>();
-		playerHand.add(h1testCard1);
-		playerHand.add(h1testCard2);
+		game.setBetAmount(20);
+		game.setBetOn("Banker");
+		double output = 0;
+		String testEval = logic.whoWon(game.playerHand, game.bankerHand);
+		if (testEval == "Banker"){
+			output = 20;
+		}
+		else{
+			output = 0;
+		}
+		double testWinnings = game.evaluateWinnings();
+		assertEquals(output, testWinnings, "evaluateWinnings not working" );
+	}
 
-		Card h2testCard1 = new Card("Spades", 3);
-		Card h2testCard2 = new Card("Hearts", 5);
-		ArrayList<Card> testHand2 = new ArrayList<Card>();
-		bankerHand.add(h2testCard1);
-		bankerHand.add(h2testCard2);
-
-		//add all to the game class
-		game.playerHand = testHand1;
-		game.bankerHand = testHand2;
-		double testBet = 20;
-		String testBetOn = "Banker";
+	@Test
+	void evaluateWinningsTest2()  {
+		game.setBetAmount(50);
+		game.setBetOn("Player");
+		double output = 0;
+		String testEval = logic.whoWon(game.playerHand, game.bankerHand);
+		if (testEval == "Player"){
+			output = 50;
+		}
+		else{
+			output = 0;
+		}
 
 		//h1 score = 6, h2 score = 8, Banker
 		double testWinnings = game.evaluateWinnings();
-		assertEquals(20, testWinnings, "evaluateWinnings not working" );
+		assertEquals(output, testWinnings, "evaluateWinnings not working" );
 	}
 
 }
