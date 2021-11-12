@@ -14,11 +14,13 @@ import java.util.ArrayList;
 class MyTest {
 	private BaccaratDealer dealer;
 	private BaccaratGameLogic logic;
+	private BaccaratGame game;
 
 	@BeforeEach
 	void init() {
 		dealer = new BaccaratDealer();
 		logic = new BaccaratGameLogic();
+		game = new BaccaratGame();
 		dealer.generateDeck();
 	}
 
@@ -203,7 +205,30 @@ class MyTest {
 
 	}
 
-	//testing BaccaratGame
-	
+	//testing BaccaratGame - TODO!
+	@Test
+	void evaluateWinningsTest1()  {
+		Card h1testCard1 = new Card("Spades", 3);
+		Card h1testCard2 = new Card("Clubs", 3);
+		ArrayList<Card> testHand1 = new ArrayList<Card>();
+		playerHand.add(h1testCard1);
+		playerHand.add(h1testCard2);
+
+		Card h2testCard1 = new Card("Spades", 3);
+		Card h2testCard2 = new Card("Hearts", 5);
+		ArrayList<Card> testHand2 = new ArrayList<Card>();
+		bankerHand.add(h2testCard1);
+		bankerHand.add(h2testCard2);
+
+		//add all to the game class
+		game.playerHand = testHand1;
+		game.bankerHand = testHand2;
+		double testBet = 20;
+		String testBetOn = "Banker";
+
+		//h1 score = 6, h2 score = 8, Banker
+		double testWinnings = game.evaluateWinnings();
+		assertEquals(20, testWinnings, "evaluateWinnings not working" );
+	}
 
 }
