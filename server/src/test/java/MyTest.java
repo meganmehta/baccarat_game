@@ -211,6 +211,7 @@ class MyTest {
 		game.setBetAmount(20);
 		game.setBetOn("Banker");
 		double output = 0;
+		double testWinnings = game.evaluateWinnings();
 		String testEval = logic.whoWon(game.playerHand, game.bankerHand);
 		if (testEval == "Banker"){
 			output = 20;
@@ -218,7 +219,6 @@ class MyTest {
 		else{
 			output = 0;
 		}
-		double testWinnings = game.evaluateWinnings();
 		assertEquals(output, testWinnings, "evaluateWinnings not working" );
 	}
 
@@ -227,6 +227,8 @@ class MyTest {
 		game.setBetAmount(50);
 		game.setBetOn("Player");
 		double output = 0;
+		//h1 score = 6, h2 score = 8, Banker
+		double testWinnings = game.evaluateWinnings();
 		String testEval = logic.whoWon(game.playerHand, game.bankerHand);
 		if (testEval == "Player"){
 			output = 50;
@@ -234,9 +236,6 @@ class MyTest {
 		else{
 			output = 0;
 		}
-
-		//h1 score = 6, h2 score = 8, Banker
-		double testWinnings = game.evaluateWinnings();
 		assertEquals(output, testWinnings, "evaluateWinnings not working" );
 	}
 

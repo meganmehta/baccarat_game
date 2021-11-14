@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.lang.String;
 
 public class BaccaratGame {
-    ArrayList<Card> playerHand = new ArrayList<Card>();
-    ArrayList<Card> bankerHand = new ArrayList<Card>();
+    ArrayList<Card> playerHand;
+    ArrayList<Card> bankerHand;
     BaccaratDealer theDealer = new BaccaratDealer();
     BaccaratGameLogic logic = new BaccaratGameLogic();
     double currentBet;
@@ -24,8 +24,8 @@ public class BaccaratGame {
 
 		//create deck + deal hands
 		theDealer.generateDeck();
-		playerHand = theDealer.dealHand();
-		bankerHand = theDealer.dealHand();
+		this.playerHand = theDealer.dealHand();
+		this.bankerHand = theDealer.dealHand();
 
 		if (logic.evaluatePlayerDraw(playerHand) == true){
 			Card newCard1 = theDealer.drawOne();
