@@ -51,7 +51,6 @@ public class JavaFXTemplate extends Application {
 	HashMap<String, Scene> sceneMap;
 	Button startBtn;
 	Stage primaryStage;
-	GridPane gridPane;
 	Scene introScene, gameActionsScene;
 	Text welcome;
 	ListView gameActions;
@@ -72,9 +71,7 @@ public class JavaFXTemplate extends Application {
 
 		primaryStage.setTitle("Baccarat Server");
 
-		Text welcome = new Text("Welcome to Baccarat (Server)!");
-		//welcome.setX(100);
-		//welcome.setY(250);
+		Text welcome = new Text("Welcome to Baccarat!");
 		welcome.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 30));
 
 		//create HBox for portNumber label + textField
