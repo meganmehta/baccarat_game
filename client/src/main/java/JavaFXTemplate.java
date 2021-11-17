@@ -48,7 +48,7 @@ import javafx.geometry.Pos;
 
 public class JavaFXTemplate extends Application {
 	HashMap<String, Scene> sceneMap;
-	Button startBtn;
+	Button startBtn, newRound;
 	Stage primaryStage;
 	Scene introScene, gameScene;
 	Text welcome;
@@ -115,6 +115,8 @@ public class JavaFXTemplate extends Application {
 	}
 
 	public Scene createGameScene() {
+		Text welcome = new Text("Baccarat!");
+		welcome.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 50));
 
 		ListView actions = new ListView();
 		actions.setPrefWidth(100);
@@ -125,13 +127,25 @@ public class JavaFXTemplate extends Application {
 		//create banker space
 
 		//create actions bar
-
-
-		HBox playerActionsBox = new HBox(ipAddy, t2);
-
 		//listMoves.getItems().add("");
+		newRound = new Button("New Round!");
+		Label string1 = new Label("Enter the amount which you're going to bid!");
+		TextField bid = new TextField();
+		bid.setPromptText("Bid:");
+		HBox bidBox = new HBox(string1, bid);
+		
+		Label string2 = new Label("Enter the player which you're gonna bet on!");
+		TextField player = new TextField();
+		player.setPromptText("Player:");
+		HBox playerBox = new HBox(string2, player);
+
+
+		VBox allStuff = new VBox(50, welcome, bidBox, playerBox, newRound);
+		allStuff.setAlignment(Pos.TOP_CENTER);
 
 		BorderPane root = new BorderPane();
+		root.setPadding(new Insets(70));
+		root.setCenter(allStuff);
 
 		Scene gameScene = new Scene(root, 850, 750);
 		gameScene.getRoot().setStyle("-fx-background-color: green;-fx-font-family: 'verdana';");
