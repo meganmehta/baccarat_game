@@ -45,18 +45,25 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.function.Function;
 import javafx.geometry.Pos;
+import javafx.scene.control.ComboBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+
+
 
 public class JavaFXTemplate extends Application {
 	HashMap<String, Scene> sceneMap;
-	Button startBtn, newRound;
+	Button startBtn, connectBtn, exitBtn;
 	Stage primaryStage;
 	Scene introScene, gameScene;
-	Text welcome;
+	Text welcome, playerWins;
 	ListView actions;
 	TextField t1, t2;
-	Label portNum, ipAddy;
-	VBox allStuff;
-	HBox portNumberBox, ipBox, playerActionsBox;
+	Label portNum, ipAddy, bidLab, bidDropLab, playSpace, bankSpace;
+	VBox allStuff, gameControls, bidStuff, cardSpace;
+	HBox portNumberBox, ipBox, playerActionsBox, bidMenu, bidBox;
+	ComboBox bidDrop;
+	Rectangle playerSpace, bankerSpace;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -88,13 +95,13 @@ public class JavaFXTemplate extends Application {
 		ipBox.setAlignment(Pos.CENTER);
 
 		//connect to server button
-		startBtn = new Button("Connect to Server");
-		startBtn.setStyle("-fx-background-color: yellow; ");
+		connectBtn = new Button("Connect to Server");
+		connectBtn.setStyle("-fx-background-color: yellow; ");
 
 		//when startBtn is clicked, switch to gameActionsScreen
-		startBtn.setOnAction(e -> primaryStage.setScene(sceneMap.get("gameScreen")));
+		connectBtn.setOnAction(e -> primaryStage.setScene(sceneMap.get("gameScreen")));
 
-		VBox allStuff = new VBox(50, welcome, portNumberBox, ipBox, startBtn);
+		VBox allStuff = new VBox(50, welcome, portNumberBox, ipBox, connectBtn);
 		allStuff.setAlignment(Pos.CENTER);
 
 		BorderPane welcomePane = new BorderPane();
@@ -115,40 +122,95 @@ public class JavaFXTemplate extends Application {
 	}
 
 	public Scene createGameScene() {
-		Text welcome = new Text("Baccarat!");
-		welcome.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 50));
+
+		//game results
+		Label results = new Label("Game Results:");
+		results.setStyle("-fx-font-weight: bold");
+		results.setFont(new Font("Verdana", 12));
+		results.setTextFill(Color.WHITE);
 
 		ListView actions = new ListView();
 		actions.setPrefWidth(100);
 		actions.setPrefHeight(70);
 
-		//create player space
+		VBox resultSpace = new VBox(30, results, actions);
 
-		//create banker space
 
-		//create actions bar
-		//listMoves.getItems().add("");
-		newRound = new Button("New Round!");
-		Label string1 = new Label("Enter the amount which you're going to bid!");
+		//create player space (include cards)
+		Label playSpace = new Label("Player Cards: ");
+		playSpace.setStyle("-fx-font-weight: bold");
+		playSpace.setFont(new Font("Verdana", 16));
+		playSpace.setTextFill(Color.WHITE);
+
+		Rectangle playerSpace = new Rectangle();
+		playerSpace.setWidth(700.0f);
+		playerSpace.setHeight(150.0f);
+		playerSpace.setFill(Color.LIGHTGREEN);
+
+		//create banker space (include spaces for cards)
+		Label bankSpace = new Label("Banker Cards: ");
+		bankSpace.setStyle("-fx-font-weight: bold");
+		bankSpace.setFont(new Font("Verdana", 16));
+		bankSpace.setTextFill(Color.WHITE);
+
+		Rectangle bankerSpace = new Rectangle();
+		bankerSpace.setWidth(700.0f);
+		bankerSpace.setHeight(150.0f);
+		bankerSpace.setFill(Color.LIGHTGREEN);
+
+		VBox cardSpace = new VBox(30, playSpace, playerSpace, bankSpace, bankerSpace);
+
+		//create actions bar at bottom of game screen
+		//-----GAME CONTROLS------
+		//*start + end game buttons
+		startBtn = new Button("Start Game");
+		exitBtn = new Button("Exit");
+		VBox gameControls = new VBox(10, startBtn, exitBtn);
+		gameControls.setAlignment(Pos.TOP_CENTER);
+
+		//------BID STUFF-------
+		//bid text field
+		Label bidLab = new Label("Bid Amount: ");
 		TextField bid = new TextField();
-		bid.setPromptText("Bid:");
-		HBox bidBox = new HBox(string1, bid);
-		
-		Label string2 = new Label("Enter the player which you're gonna bet on!");
-		TextField player = new TextField();
-		player.setPromptText("Player:");
-		HBox playerBox = new HBox(string2, player);
+		bid.setPromptText("Enter bit amount here");
+		bidLab.setTextFill(Color.web("#FFFFFF"));
+		HBox bidBox = new HBox(bidLab, bid);
+		bidBox.setAlignment(Pos.TOP_CENTER);
 
+		//bidding on selection - drop down menu
+		Label bidDropLab = new Label("Bidding on: ");
+		bidDropLab.setTextFill(Color.web("#FFFFFF"));
+		ComboBox bidDrop = new ComboBox();
 
-		VBox allStuff = new VBox(50, welcome, bidBox, playerBox, newRound);
-		allStuff.setAlignment(Pos.TOP_CENTER);
+		bidDrop.getItems().add("The Player");
+		bidDrop.getItems().add("The Banker");
+		bidDrop.getItems().add("Draw");
+		HBox bidMenu = new HBox(bidDropLab, bidDrop);
+		//String value = (String) comboBox.getValue(); -> how to get selection value in ComboBox
+
+		//*create vertical box for bid amount + bidding on selection
+		VBox bidStuff = new VBox(10, bidBox, bidMenu);
+		bidStuff.setAlignment(Pos.TOP_CENTER);
+
+		//-----DISPLAY PLAYER WINNINGS------
+		//*player winnings here - have to update with winnings number from Game functions
+		Text playerWins = new Text("player wins here");
+		playerWins.setFill(Color.WHITE);
+		playerWins.setStyle("-fx-font-weight: bold");
+
+		//create horizontal box - game actions
+		HBox playerActionsBox = new HBox(100, playerWins, bidStuff, gameControls);
+		playerActionsBox.setAlignment(Pos.TOP_CENTER);
 
 		BorderPane root = new BorderPane();
-		root.setPadding(new Insets(70));
-		root.setCenter(allStuff);
+		root.setPadding(new Insets(50));
+		//root.setTop(resultSpace);
+		root.setCenter(cardSpace);
+		root.setBottom(playerActionsBox);
 
 		Scene gameScene = new Scene(root, 850, 750);
-		gameScene.getRoot().setStyle("-fx-background-color: green;-fx-font-family: 'verdana';");
+		gameScene.getRoot().setStyle("-fx-text-fill: white; -fx-background-color: green;-fx-font-family: 'verdana';");
+
 
 		return gameScene;
 	}
