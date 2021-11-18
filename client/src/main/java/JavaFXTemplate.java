@@ -97,9 +97,13 @@ public class JavaFXTemplate extends Application {
 		//connect to server button
 		connectBtn = new Button("Connect to Server");
 		connectBtn.setStyle("-fx-background-color: yellow; ");
-
-		//when startBtn is clicked, switch to gameActionsScreen
-		connectBtn.setOnAction(e -> primaryStage.setScene(sceneMap.get("gameScreen")));
+		
+		//when startBtn is clicked, switch to gameActionsScreen when theres stuff in the text field
+		connectBtn.setOnAction(e -> {
+			if(t1.getText() != "" && t2.getText() != "") {
+				primaryStage.setScene(sceneMap.get("gameScreen"));
+				}
+			});
 
 		VBox allStuff = new VBox(50, welcome, portNumberBox, ipBox, connectBtn);
 		allStuff.setAlignment(Pos.CENTER);
@@ -115,6 +119,7 @@ public class JavaFXTemplate extends Application {
 
 		//add any styline elements in this function
 		introScene.getRoot().setStyle("-fx-background-color: pink;-fx-font-family: 'verdana';");
+		
 
 		primaryStage.setScene(introScene);
 		primaryStage.show();
@@ -164,7 +169,16 @@ public class JavaFXTemplate extends Application {
 		//-----GAME CONTROLS------
 		//*start + end game buttons
 		startBtn = new Button("Start Game");
+		//Starts a new game when pressed
+		startBtn.setOnAction(event -> {
+			this.primaryStage.setScene(createGameScene());
+			this.primaryStage.show();
+		});
 		exitBtn = new Button("Exit");
+		//Exits the game when pressed
+		exitBtn.setOnAction(event -> {
+			Platform.exit();
+		});
 		VBox gameControls = new VBox(10, startBtn, exitBtn);
 		gameControls.setAlignment(Pos.TOP_CENTER);
 
@@ -197,9 +211,14 @@ public class JavaFXTemplate extends Application {
 		Text playerWins = new Text("player wins here");
 		playerWins.setFill(Color.WHITE);
 		playerWins.setStyle("-fx-font-weight: bold");
+		
+		Text currentWinnings = new Text("Current winnings:");
+		currentWinnings.setFill(Color.WHITE);
+		currentWinnings.setStyle("-fx-font-weight: bold; -fx-padding: 50 0 0 0;");
 
+		VBox stats = new VBox(5, playerWins, currentWinnings);
 		//create horizontal box - game actions
-		HBox playerActionsBox = new HBox(100, playerWins, bidStuff, gameControls);
+		HBox playerActionsBox = new HBox(100, stats, bidStuff, gameControls);
 		playerActionsBox.setAlignment(Pos.TOP_CENTER);
 
 		BorderPane root = new BorderPane();
