@@ -171,6 +171,7 @@ public class JavaFXTemplate extends Application {
 		startBtn = new Button("Start Game");
 		//Starts a new game when pressed
 		startBtn.setOnAction(event -> {
+			//we don't need to call createGameScene, we need to start a Baccarat Game class
 			this.primaryStage.setScene(createGameScene());
 			this.primaryStage.show();
 		});
@@ -217,6 +218,7 @@ public class JavaFXTemplate extends Application {
 		currentWinnings.setStyle("-fx-font-weight: bold; -fx-padding: 50 0 0 0;");
 
 		VBox stats = new VBox(5, playerWins, currentWinnings);
+
 		//create horizontal box - game actions
 		HBox playerActionsBox = new HBox(100, stats, bidStuff, gameControls);
 		playerActionsBox.setAlignment(Pos.TOP_CENTER);

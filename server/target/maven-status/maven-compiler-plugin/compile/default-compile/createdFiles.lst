@@ -1,5 +1,8 @@
-Card.class
-BaccaratGame.class
 BaccaratDealer.class
 BaccaratGameLogic.class
+Server$ClientThread.class
+Server.class
+Card.class
+BaccaratGame.class
 JavaFXTemplate.class
+Server$TheServer.class

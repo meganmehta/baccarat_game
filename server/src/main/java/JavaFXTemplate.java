@@ -53,11 +53,12 @@ public class JavaFXTemplate extends Application {
 	Stage primaryStage;
 	Scene introScene, gameActionsScene;
 	Text welcome;
-	ListView gameActions;
+	ListView<String> gameActions;
 	TextField t1;
 	Label portNum;
 	VBox allStuff;
 	HBox portNumberBox;
+	Server serverConnection;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -84,8 +85,17 @@ public class JavaFXTemplate extends Application {
 		startBtn = new Button("Start Server");
 		startBtn.setStyle("-fx-background-color: yellow; ");
 
-		//when startBtn is clicked, switch to gameActionsScreen
-		startBtn.setOnAction(e -> primaryStage.setScene(sceneMap.get("gameActionsScreen")));
+		gameActions = new ListView<String>(); //list view with all server actions
+
+		//when startBtn is clicked, switch to gameActionsScreen + start serverConnection
+		startBtn.setOnAction(e -> {
+			primaryStage.setScene(sceneMap.get("gameActionsScreen"));
+			serverConnection = new Server(data -> {
+				Platform.runLater(()->{
+					gameActions.getItems().add(data.toString());
+				});
+			});
+		});
 
 		VBox allStuff = new VBox(50, welcome, portNumberBox, startBtn);
 		allStuff.setAlignment(Pos.CENTER);
@@ -120,20 +130,20 @@ public class JavaFXTemplate extends Application {
 		//- is the client playing another hand.
 
 
-		ListView listMoves = new ListView();
+		/*ListView listMoves = new ListView();
 		listMoves.setPrefWidth(100);
-		listMoves.setPrefHeight(70);
+		listMoves.setPrefHeight(70);*/
 
 		//while server is on? then...
 		//when client joins, output "client X has joined. there are now Y clients connected to the server"
 
-		listMoves.getItems().add("");
-
 		BorderPane root = new BorderPane();
-		root.setCenter(gridPane);
+		root.setPadding(new Insets(70));
+		root.setStyle("-fx-background-color: #690500; -fx-font-family: 'verdana';");
+
+		root.setCenter(gameActions);
 
 		Scene gameActionsScene = new Scene(root, 850, 750);
-		gameActionsScene.getRoot().setStyle("-fx-background-color: green;-fx-font-family: 'verdana';");
 
 		return gameActionsScene;
 	}
