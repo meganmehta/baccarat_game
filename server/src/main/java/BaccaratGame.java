@@ -8,7 +8,7 @@ public class BaccaratGame {
     BaccaratGameLogic logic = new BaccaratGameLogic();
     double currentBet;
     double totalWinnings;
-    String betOn;
+    String betOn, winner;
 
 	public void setBetAmount(double betAmount){
 		this.currentBet = betAmount;
@@ -65,15 +65,6 @@ public class BaccaratGame {
 			}
 		}
 
-    	/*if((betOn == winner && winner == "Player") || (betOn == winner && winner == "Banker")) {
-    		totalWinnings += currentBet;
-    	}
-    	else if(betOn == winner && winner == "Draw") { //can't bet on a draw
-    		totalWinnings += currentBet*8;
-    	}
-    	else {
-    		totalWinnings -= currentBet; //can't be negative wins, the winnings would just be 0
-    	}*/
     	return totalWinnings;
     }
 }

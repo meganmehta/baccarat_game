@@ -1,5 +1,6 @@
 BaccaratDealer.class
 BaccaratGameLogic.class
+BaccaratInfo.class
 Server$ClientThread.class
 Server.class
 Card.class

@@ -24,8 +24,6 @@ class MyTest {
 		dealer.generateDeck();
 	}
 
-	//testing Card constructor
-
 
 	//testing BaccaratDealer
 	@Test

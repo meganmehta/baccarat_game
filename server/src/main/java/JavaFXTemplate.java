@@ -130,12 +130,6 @@ public class JavaFXTemplate extends Application {
 		//- is the client playing another hand.
 
 
-		/*ListView listMoves = new ListView();
-		listMoves.setPrefWidth(100);
-		listMoves.setPrefHeight(70);*/
-
-		//while server is on? then...
-		//when client joins, output "client X has joined. there are now Y clients connected to the server"
 
 		BorderPane root = new BorderPane();
 		root.setPadding(new Insets(70));

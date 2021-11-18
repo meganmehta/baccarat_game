@@ -36,8 +36,9 @@ public class Server{
                 while(true) {
 
                     ClientThread c = new ClientThread(mysocket.accept(), count);
-                    callback.accept("client has connected to server: " + "client #" + count);
+                    callback.accept("New client has connected to server: " + "Client #" + count);
                     clients.add(c);
+                    callback.accept("Number of clients connected to server: " + clients.size()); //how many clients are connected to the server.
                     c.start();
 
                     count++;
@@ -64,6 +65,7 @@ public class Server{
             this.count = count;
         }
 
+        //updateClients goes on all client threads?
         public void updateClients(String message) {
             for(int i = 0; i < clients.size(); i++) {
                 ClientThread t = clients.get(i);
@@ -85,19 +87,28 @@ public class Server{
                 System.out.println("Streams not open");
             }
 
-            updateClients("new client on server: client #"+count);
+            updateClients("New client on server: Client #"+ count); //if a new client joins the server.
 
             while(true) {
                 try {
-                    String data = in.readObject().toString();
-                    callback.accept("client: " + count + " sent: " + data);
-                    updateClients("client #"+count+" said: "+data);
+                    //include game related updates here?
+                    //list has to inclue:
+                    //- The results of each game played by any client.
+                    //- how much the a client bet on each game
+                    //- how much a client won or lost on each game
+                    //- if a client drops off the server.
+                    //- is the client playing another hand.
+                    BaccaratInfo gameInfo = (BaccaratInfo) in.readObject();
+                    callback.accept("Client #" + count + " bet $" +
+                            gameInfo.betAmount + " on " + gameInfo.userBetChoice);
+                    //updateClients("client #"+count+" said: "+data);
 
                 }
                 catch(Exception e) {
-                    callback.accept("OOOOPPs...Something wrong with the socket from client: " + count + "....closing down!");
+                    //callback.accept("OOOOPPs...Something wrong with the socket from client: " + count + "....closing down!");
                     updateClients("Client #"+count+" has left the server!");
                     clients.remove(this);
+                    callback.accept("Number of clients connected to server: " + clients.size()); //how many clients are connected to the server.
                     break;
                 }
             }

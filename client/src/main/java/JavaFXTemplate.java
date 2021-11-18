@@ -57,6 +57,7 @@ public class JavaFXTemplate extends Application {
 	Stage primaryStage;
 	Scene introScene, gameScene;
 	Text welcome, playerWins;
+	ListView<String> clientActions;
 	ListView actions;
 	TextField t1, t2;
 	Label portNum, ipAddy, bidLab, bidDropLab, playSpace, bankSpace;
@@ -64,6 +65,8 @@ public class JavaFXTemplate extends Application {
 	HBox portNumberBox, ipBox, playerActionsBox, bidMenu, bidBox;
 	ComboBox bidDrop;
 	Rectangle playerSpace, bankerSpace;
+	Client clientConnection;
+
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -74,7 +77,7 @@ public class JavaFXTemplate extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		sceneMap = new HashMap<String,Scene>();
-		primaryStage.setTitle("Baccarat (Client)");
+		primaryStage.setTitle("Baccarat Client");
 
 		Text welcome = new Text("Welcome to Baccarat!");
 
@@ -97,13 +100,18 @@ public class JavaFXTemplate extends Application {
 		//connect to server button
 		connectBtn = new Button("Connect to Server");
 		connectBtn.setStyle("-fx-background-color: yellow; ");
-		
+
+		clientActions = new ListView<String>(); //list view with all client actions
 		//when startBtn is clicked, switch to gameActionsScreen when theres stuff in the text field
 		connectBtn.setOnAction(e -> {
 			if(t1.getText() != "" && t2.getText() != "") {
 				primaryStage.setScene(sceneMap.get("gameScreen"));
-				}
-			});
+				clientConnection = new Client(data->{
+					Platform.runLater(()->{clientActions.getItems().add(data.toString());
+					});
+				});
+				clientConnection.start();
+		}});
 
 		VBox allStuff = new VBox(50, welcome, portNumberBox, ipBox, connectBtn);
 		allStuff.setAlignment(Pos.CENTER);
@@ -127,6 +135,16 @@ public class JavaFXTemplate extends Application {
 	}
 
 	public Scene createGameScene() {
+		//list has to inclue:
+		//- how many clients are connected to the server.
+		//- The results of each game played by any client.
+		//- how much the a client bet on each game
+		//- how much a client won or lost on each game
+		//- if a client drops off the server.
+		//- if a new client joins the server.
+		//- is the client playing another hand.
+
+		//use clientConnection.send(c1.getText()); !!! to send info
 
 		//game results
 		Label results = new Label("Game Results:");
@@ -209,11 +227,11 @@ public class JavaFXTemplate extends Application {
 
 		//-----DISPLAY PLAYER WINNINGS------
 		//*player winnings here - have to update with winnings number from Game functions
-		Text playerWins = new Text("player wins here");
+		Text playerWins = new Text("Player Wins:");
 		playerWins.setFill(Color.WHITE);
 		playerWins.setStyle("-fx-font-weight: bold");
 		
-		Text currentWinnings = new Text("Current winnings:");
+		Text currentWinnings = new Text("$$$");
 		currentWinnings.setFill(Color.WHITE);
 		currentWinnings.setStyle("-fx-font-weight: bold; -fx-padding: 50 0 0 0;");
 

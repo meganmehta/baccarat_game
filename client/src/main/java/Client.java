@@ -15,9 +15,11 @@ public class Client extends Thread{
     ObjectOutputStream out;
     ObjectInputStream in;
 
-    private Consumer<Serializable> callback;
+    BaccaratGmae clientGame;
 
-    Client(Consumer<Serializable> call){
+    private Consumer<BaccaratInfo> callback;
+
+    Client(Consumer<BaccaratInfo> call){
 
         callback = call;
     }
@@ -29,14 +31,17 @@ public class Client extends Thread{
             out = new ObjectOutputStream(socketClient.getOutputStream());
             in = new ObjectInputStream(socketClient.getInputStream());
             socketClient.setTcpNoDelay(true);
+            //create new game for every client thread?
+            BaccaratGame clientGame = new BaccaratGame();
         }
         catch(Exception e) {}
 
         while(true) {
 
             try {
-                String message = in.readObject().toString();
-                callback.accept(message);
+                //would this be actual data variables in the BaccaratInfo class or?
+                BaccaratInfo gameInfo = (BaccaratInfo)in.readObject();
+                callback.accept(gameInfo);
             }
             catch(Exception e) {}
         }
