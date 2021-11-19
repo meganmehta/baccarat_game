@@ -19,6 +19,4 @@ class BaccaratInfo implements Serializable{
     // results of the game that has been played in the server
     // (who won, what cards were dealt, total winnings, etc.).
 
-    //use clientConnection.send(c1.getText()); !!! to send info
-
 }

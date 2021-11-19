@@ -45,17 +45,18 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.function.Function;
 import javafx.geometry.Pos;
+import javafx.scene.paint.Color;
 
 public class JavaFXTemplate extends Application {
 
 	HashMap<String, Scene> sceneMap;
-	Button startBtn;
+	Button startBtn, endBtn;
 	Stage primaryStage;
 	Scene introScene, gameActionsScene;
 	Text welcome;
 	ListView<String> gameActions;
 	TextField t1;
-	Label portNum;
+	Label portNum, gameActionIntro;
 	VBox allStuff;
 	HBox portNumberBox;
 	Server serverConnection;
@@ -129,13 +130,21 @@ public class JavaFXTemplate extends Application {
 		//- if a new client joins the server.
 		//- is the client playing another hand.
 
+		Label gameActionIntro = new Label("Baccarat Game Info");
+		gameActionIntro.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 30));
+		gameActionIntro.setTextFill(Color.WHITE);
 
+		endBtn = new Button("Stop Server");
+		endBtn.setStyle("-fx-background-color: yellow; ");
+		endBtn.setOnAction(e -> {Platform.exit();});
 
 		BorderPane root = new BorderPane();
 		root.setPadding(new Insets(70));
 		root.setStyle("-fx-background-color: #690500; -fx-font-family: 'verdana';");
 
+		root.setTop(gameActionIntro);
 		root.setCenter(gameActions);
+		root.setBottom(endBtn);
 
 		Scene gameActionsScene = new Scene(root, 850, 750);
 

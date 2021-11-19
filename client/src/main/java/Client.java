@@ -15,11 +15,11 @@ public class Client extends Thread{
     ObjectOutputStream out;
     ObjectInputStream in;
 
-    BaccaratGmae clientGame;
+    //BaccaratGmae clientGame;
 
-    private Consumer<BaccaratInfo> callback;
+    private Consumer<Serializable> callback;
 
-    Client(Consumer<BaccaratInfo> call){
+    Client(Consumer<Serializable> call){
 
         callback = call;
     }
@@ -32,7 +32,7 @@ public class Client extends Thread{
             in = new ObjectInputStream(socketClient.getInputStream());
             socketClient.setTcpNoDelay(true);
             //create new game for every client thread?
-            BaccaratGame clientGame = new BaccaratGame();
+            //BaccaratGame clientGame = new BaccaratGame();
         }
         catch(Exception e) {}
 
