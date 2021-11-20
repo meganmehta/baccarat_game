@@ -15,7 +15,6 @@ public class Client extends Thread{
     ObjectOutputStream out;
     ObjectInputStream in;
 
-    //BaccaratGmae clientGame;
 
     private Consumer<Serializable> callback;
 
@@ -31,17 +30,17 @@ public class Client extends Thread{
             out = new ObjectOutputStream(socketClient.getOutputStream());
             in = new ObjectInputStream(socketClient.getInputStream());
             socketClient.setTcpNoDelay(true);
-            //create new game for every client thread?
-            //BaccaratGame clientGame = new BaccaratGame();
+
         }
         catch(Exception e) {}
 
         while(true) {
 
             try {
-                //would this be actual data variables in the BaccaratInfo class or?
-                BaccaratInfo gameInfo = (BaccaratInfo)in.readObject();
-                callback.accept(gameInfo);
+                String message = in.readObject().toString();
+                callback.accept(message);
+                //BaccaratInfo gameInfo = (BaccaratInfo)in.readObject();
+                //callback.accept(gameInfo);
             }
             catch(Exception e) {}
         }

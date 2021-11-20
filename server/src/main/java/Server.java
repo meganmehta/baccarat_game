@@ -14,6 +14,7 @@ public class Server{
     int count = 1;
     ArrayList<ClientThread> clients = new ArrayList<ClientThread>();
     TheServer server;
+
     private Consumer<Serializable> callback;
 
 
@@ -59,6 +60,8 @@ public class Server{
         int count;
         ObjectInputStream in;
         ObjectOutputStream out;
+        BaccaratGame game;
+
 
         ClientThread(Socket s, int count){
             this.connection = s;
@@ -82,6 +85,8 @@ public class Server{
                 in = new ObjectInputStream(connection.getInputStream());
                 out = new ObjectOutputStream(connection.getOutputStream());
                 connection.setTcpNoDelay(true);
+                game = new BaccaratGame();
+
             }
             catch(Exception e) {
                 System.out.println("Streams not open");
@@ -98,15 +103,14 @@ public class Server{
                     //- how much a client won or lost on each game
                     //- if a client drops off the server.
                     //- is the client playing another hand.
+                    game = new BaccaratGame();
                     BaccaratInfo gameInfo = (BaccaratInfo) in.readObject();
                     callback.accept("Client #" + count + " bet $" +
                             gameInfo.betAmount + " on " + gameInfo.userBetChoice);
-                    //updateClients("client #"+count+" said: "+data);
 
                 }
                 catch(Exception e) {
-                    //callback.accept("OOOOPPs...Something wrong with the socket from client: " + count + "....closing down!");
-                    updateClients("Client #"+count+" has left the server!");
+                    callback.accept("Client #"+ count +" has left the server!");
                     clients.remove(this);
                     callback.accept("Number of clients connected to server: " + clients.size()); //how many clients are connected to the server.
                     break;
