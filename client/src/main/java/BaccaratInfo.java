@@ -6,12 +6,16 @@ class BaccaratInfo implements Serializable{
     String userBetChoice;
     //ArrayList<Card> playerHand;
     //ArrayList<Card> bankerHand;
-
+    BaccaratGame game = new BaccaratGame();
+    //Pass the game object into server
+    intent.putExtra("GamePlay", game);
+    intent.putExtra("Bet", betAmount);
+    intent.putExtra("Choice", userBetChoice);
     //It should play through one hand and then send the client all of
     //the information for that game:
-    //• Initial Banker and Player hand
-    //• If either the Banker or Player got an extra card and what it was
-    //• The result of the game based on the clients bet (did they win or lose and how
+    //â€¢ Initial Banker and Player hand
+    //â€¢ If either the Banker or Player got an extra card and what it was
+    //â€¢ The result of the game based on the clients bet (did they win or lose and how
     //much)
 
 
