@@ -4,6 +4,8 @@ import java.lang.String;
 public class BaccaratGame {
     ArrayList<Card> playerHand;
     ArrayList<Card> bankerHand;
+	Card playerECard;
+	Card bankerECard;
     BaccaratDealer theDealer = new BaccaratDealer();
     BaccaratGameLogic logic = new BaccaratGameLogic();
     double currentBet;
@@ -28,13 +30,13 @@ public class BaccaratGame {
 		this.bankerHand = theDealer.dealHand();
 
 		if (logic.evaluatePlayerDraw(playerHand) == true){
-			Card newCard1 = theDealer.drawOne();
-			playerHand.add(newCard1);
+			this.playerECard = theDealer.drawOne();
+			playerHand.add(playerECard);
 		}
 
 		if (logic.evaluateBankerDraw(bankerHand, playerHand.get(playerHand.size() - 1)) == true){
-			Card newCard2 = theDealer.drawOne();
-			bankerHand.add(newCard2);
+			this.bankerECard = theDealer.drawOne();
+			bankerHand.add(bankerECard);
 		}
 
     	String winner = logic.whoWon(playerHand, bankerHand);

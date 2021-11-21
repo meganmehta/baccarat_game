@@ -1,22 +1,30 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 
-class BaccaratInfo implements Serializable{
+//BaccaratInfo class for Client
+public class BaccaratInfo implements Serializable{
     double betAmount;
     String userBetChoice;
-    //ArrayList<Card> playerHand;
-    //ArrayList<Card> bankerHand;
-    BaccaratGame game = new BaccaratGame();
-    //Pass the game object into server
-    intent.putExtra("GamePlay", game);
-    intent.putExtra("Bet", betAmount);
-    intent.putExtra("Choice", userBetChoice);
-    //It should play through one hand and then send the client all of
-    //the information for that game:
-    //â€¢ Initial Banker and Player hand
-    //â€¢ If either the Banker or Player got an extra card and what it was
-    //â€¢ The result of the game based on the clients bet (did they win or lose and how
-    //much)
+    ArrayList<Card> playerHand = new ArrayList<Card>();;
+    ArrayList<Card> bankerHand = new ArrayList<Card>();;
+    Card extraPlayerCard;
+    Card extraBankerCard;
+
+    //When a client connects to the server, the server will wait to receive a message from the
+    //client to play. That message should include the amount they bet and what they bet on:
+    //Banker, Player or Draw
+    public BaccaratInfo(double betAmount, String userBetChoice,
+                        ArrayList<Card> playerHand, ArrayList<Card> bankerHand,
+                        Card extraPlayerCard, Card extraBankerCard){
+        this.betAmount = betAmount;
+        this.userBetChoice = userBetChoice;
+        this.playerHand = playerHand;
+        this.bankerHand = bankerHand;
+        this.extraBankerCard = this.extraBankerCard;
+        this.extraPlayerCard = this.extraPlayerCard;
+    }
+
+
 
 
     //list has to inclue:

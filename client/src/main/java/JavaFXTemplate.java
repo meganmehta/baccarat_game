@@ -5,6 +5,10 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.io.Serializable;
+
+
 import javafx.scene.control.ListView;
 import javafx.application.Platform;
 import javafx.animation.PauseTransition;
@@ -48,6 +52,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.control.TextArea;
 
 
 
@@ -57,7 +62,7 @@ public class JavaFXTemplate extends Application {
 	Stage primaryStage;
 	Scene introScene, gameScene;
 	Text welcome, playerWins;
-	ListView<String> clientActions;
+	ArrayList<Serializable> clientActions;
 	ListView actions;
 	TextField t1, t2;
 	Label portNum, ipAddy, bidLab, bidDropLab, playSpace, bankSpace;
@@ -101,13 +106,16 @@ public class JavaFXTemplate extends Application {
 		connectBtn = new Button("Connect to Server");
 		connectBtn.setStyle("-fx-background-color: yellow; ");
 
-		clientActions = new ListView<String>(); //list view with all client actions
+		clientActions = new ArrayList<Serializable>(); //list view with all client actions
 		//when startBtn is clicked, switch to gameActionsScreen when theres stuff in the text field
 		connectBtn.setOnAction(e -> {
 			if(t1.getText() != "" && t2.getText() != "") {
 				primaryStage.setScene(sceneMap.get("gameScreen"));
-				clientConnection = new Client(data->{
-					Platform.runLater(()->{clientActions.getItems().add(data.toString());
+				clientConnection = new Client(gameInfo->{
+					Platform.runLater(()->{
+						//recast
+						BaccaratInfo recastGame = (BaccaratInfo)gameInfo;
+						clientActions.add(gameInfo);
 					});
 				});
 				clientConnection.start();
@@ -135,28 +143,20 @@ public class JavaFXTemplate extends Application {
 	}
 
 	public Scene createGameScene() {
-		//list has to inclue:
-		//- how many clients are connected to the server.
-		//- The results of each game played by any client.
-		//- how much the a client bet on each game
-		//- how much a client won or lost on each game
-		//- if a client drops off the server.
-		//- if a new client joins the server.
-		//- is the client playing another hand.
-
-		//use clientConnection.send(c1.getText()); !!! to send info
 
 		//game results
-		Label results = new Label("Game Results:");
-		results.setStyle("-fx-font-weight: bold");
-		results.setFont(new Font("Verdana", 12));
-		results.setTextFill(Color.WHITE);
+		Label result1 = new Label("Game Results:");
+		result1.setStyle("-fx-font-weight: bold");
+		result1.setFont(new Font("Verdana", 12));
+		result1.setTextFill(Color.WHITE);
 
-		ListView actions = new ListView();
-		actions.setPrefWidth(100);
-		actions.setPrefHeight(70);
+		TextArea results = new TextArea("");
+		results.setPrefHeight(50);
+		results.setPrefWidth(50);
+		results.setText("Player Total: 7 Banker Total 5!" + " Player wins!" + " Sorry, you bet Draw! You lost your bet!");
 
-		VBox resultSpace = new VBox(30, results, actions);
+		VBox resultSpace = new VBox(10,result1, results);
+		resultSpace.setAlignment(Pos.TOP_CENTER);
 
 
 		//create player space (include cards)
@@ -170,6 +170,8 @@ public class JavaFXTemplate extends Application {
 		playerSpace.setHeight(150.0f);
 		playerSpace.setFill(Color.LIGHTGREEN);
 
+		//banker cards
+
 		//create banker space (include spaces for cards)
 		Label bankSpace = new Label("Banker Cards: ");
 		bankSpace.setStyle("-fx-font-weight: bold");
@@ -182,24 +184,6 @@ public class JavaFXTemplate extends Application {
 		bankerSpace.setFill(Color.LIGHTGREEN);
 
 		VBox cardSpace = new VBox(30, playSpace, playerSpace, bankSpace, bankerSpace);
-
-		//create actions bar at bottom of game screen
-		//-----GAME CONTROLS------
-		//*start + end game buttons
-		startBtn = new Button("Start Game");
-		//Starts a new game when pressed
-		startBtn.setOnAction(event -> {
-			//we don't need to call createGameScene, we need to start a Baccarat Game class
-			this.primaryStage.setScene(createGameScene());
-			this.primaryStage.show();
-		});
-		exitBtn = new Button("Exit");
-		//Exits the game when pressed
-		exitBtn.setOnAction(event -> {
-			Platform.exit();
-		});
-		VBox gameControls = new VBox(10, startBtn, exitBtn);
-		gameControls.setAlignment(Pos.TOP_CENTER);
 
 		//------BID STUFF-------
 		//bid text field
@@ -215,8 +199,8 @@ public class JavaFXTemplate extends Application {
 		bidDropLab.setTextFill(Color.web("#FFFFFF"));
 		ComboBox bidDrop = new ComboBox();
 
-		bidDrop.getItems().add("The Player");
-		bidDrop.getItems().add("The Banker");
+		bidDrop.getItems().add("Player");
+		bidDrop.getItems().add("Banker");
 		bidDrop.getItems().add("Draw");
 		HBox bidMenu = new HBox(bidDropLab, bidDrop);
 		//String value = (String) comboBox.getValue(); -> how to get selection value in ComboBox
@@ -224,6 +208,26 @@ public class JavaFXTemplate extends Application {
 		//*create vertical box for bid amount + bidding on selection
 		VBox bidStuff = new VBox(10, bidBox, bidMenu);
 		bidStuff.setAlignment(Pos.TOP_CENTER);
+
+		//create actions bar at bottom of game screen
+		//-----GAME CONTROLS------
+		//*start + end game buttons
+		startBtn = new Button("Start Game");
+		//Starts a new game when pressed
+		startBtn.setOnAction(event -> {
+			double betA = Double.valueOf(bid.getText());
+			BaccaratInfo gameInformation = new BaccaratInfo(betA, (String) bidDrop.getValue(), null, null, null, null);
+			clientConnection.send(gameInformation); //sends the choice of who the user bet on
+		});
+
+		exitBtn = new Button("Exit");
+		//Exits the game when pressed
+		exitBtn.setOnAction(event -> {
+			//FIX so that in server output, it shows which client left
+			Platform.exit();
+		});
+		VBox gameControls = new VBox(10, startBtn, exitBtn);
+		gameControls.setAlignment(Pos.TOP_CENTER);
 
 		//-----DISPLAY PLAYER WINNINGS------
 		//*player winnings here - have to update with winnings number from Game functions
@@ -243,7 +247,7 @@ public class JavaFXTemplate extends Application {
 
 		BorderPane root = new BorderPane();
 		root.setPadding(new Insets(50));
-		//root.setTop(resultSpace);
+		root.setTop(resultSpace);
 		root.setCenter(cardSpace);
 		root.setBottom(playerActionsBox);
 

@@ -6,7 +6,6 @@ import java.net.Socket;
 import java.util.function.Consumer;
 
 
-
 public class Client extends Thread{
 
 
@@ -37,22 +36,20 @@ public class Client extends Thread{
         while(true) {
 
             try {
-                String message = in.readObject().toString();
-                callback.accept(message);
-                //BaccaratInfo gameInfo = (BaccaratInfo)in.readObject();
-                //callback.accept(gameInfo);
+                //reads info from server
+                BaccaratInfo gameInfo = (BaccaratInfo) in.readObject();
+                callback.accept(gameInfo);
             }
             catch(Exception e) {}
         }
 
     }
 
-    public void send(String data) {
+    public void send(BaccaratInfo gameStuff) {
 
         try {
-            out.writeObject(data);
+            out.writeObject(gameStuff);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
