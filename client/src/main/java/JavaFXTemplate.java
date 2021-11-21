@@ -53,6 +53,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.control.TextArea;
+import javafx.scene.Group;
+import java.io.FileInputStream; 
+import java.io.FileNotFoundException; 
+import javafx.scene.layout.StackPane;
 
 
 
@@ -181,10 +185,6 @@ public class JavaFXTemplate extends Application {
 		playSpace.setFont(new Font("Verdana", 16));
 		playSpace.setTextFill(Color.WHITE);
 
-		Rectangle playerSpace = new Rectangle();
-		playerSpace.setWidth(700.0f);
-		playerSpace.setHeight(150.0f);
-		playerSpace.setFill(Color.LIGHTGREEN);
 
 		//banker cards
 
@@ -193,13 +193,38 @@ public class JavaFXTemplate extends Application {
 		bankSpace.setStyle("-fx-font-weight: bold");
 		bankSpace.setFont(new Font("Verdana", 16));
 		bankSpace.setTextFill(Color.WHITE);
-
-		Rectangle bankerSpace = new Rectangle();
-		bankerSpace.setWidth(700.0f);
-		bankerSpace.setHeight(150.0f);
-		bankerSpace.setFill(Color.LIGHTGREEN);
-
-		VBox cardSpace = new VBox(30, playSpace, playerSpace, bankSpace, bankerSpace);
+		//Number and letter arrays for the image location path
+		String number[] = new String[]{"1","2","3","4","5","6","7","8","9","10","11","12","13"};
+		String letter[] = new String[] {"C", "D", "H", "S"};
+		StackPane pics = new StackPane();
+		int posX = 0;
+		int posY = 0;
+		try{ 
+			for(int i = 0; i < number.length; i++) {
+				for(int j = 0; j < letter.length; j++) {
+					FileInputStream inputstream = 
+							new FileInputStream("C:\\Users\\rezar\\Downloads\\baccarat_game\\client\\src\\main\\resources\\cards\\" + number[i] + letter[j] + ".jpg");
+					Image image = new Image(inputstream); 
+					ImageView imageView = new ImageView(image);
+					//Setting the position of the image 
+					imageView.setX(posX+=50); 
+					imageView.setY(posY+=25); 
+		    
+					//setting the fit height and width of the image view 
+					imageView.setFitHeight(100); 
+					imageView.setFitWidth(100); 
+		      
+					//Setting the preserve ratio of the image view 
+					imageView.setPreserveRatio(true);  
+					pics.getChildren().add(imageView);
+				}
+			}
+		}
+		catch(FileNotFoundException e) {
+			System.out.println("Something caught");
+		}
+		
+		VBox cardSpace = new VBox(30, playSpace, bankSpace, pics);
 
 		//------BID STUFF-------
 		//bid text field
