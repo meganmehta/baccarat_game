@@ -63,6 +63,8 @@ public class Server{
         ObjectInputStream in;
         ObjectOutputStream out;
         BaccaratGame game;
+        int playerWinCount;
+        int bankerWinCount;
 
 
         ClientThread(Socket s, int count){
@@ -110,8 +112,18 @@ public class Server{
                         gameInfo.gameWinner = game.winner;
                         System.out.println(gameInfo.gameWinner);
                         gameInfo.totalWinnings = game.totalWinnings;
+                        //keeps track of all game results for client.
+                        if (gameInfo.gameWinner.equals("Player")){
+                            playerWinCount++;
+                            gameInfo.playerGameWins = playerWinCount;
+                            //callback.accept("Player wins on Client #" + count + ": " + playerWinCount);
+                        }
+                        else if (gameInfo.gameWinner.equals("Banker")){
+                            bankerWinCount++;
+                            gameInfo.bankerGameWins = bankerWinCount;
+                            //callback.accept("Banker wins on Client #" + count + ": " + bankerWinCount);
+                        }
                         out.writeObject(gameInfo); //sends all game info to client
-
                         // -------- SERVER MESSAGES --------
                         //The results of each game played by any client.
                         Thread.sleep(2000);

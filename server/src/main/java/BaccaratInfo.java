@@ -12,6 +12,8 @@ public class BaccaratInfo implements Serializable{
     String gameWinner;
     Boolean newGame;
     double totalWinnings;
+    int playerGameWins;
+    int bankerGameWins;
 
     //When a client connects to the server, the server will wait to receive a message from the
     //client to play. That message should include the amount they bet and what they bet on:
@@ -19,7 +21,8 @@ public class BaccaratInfo implements Serializable{
     public BaccaratInfo(double betAmount, String userBetChoice,
                         ArrayList<Card> playerHand, ArrayList<Card> bankerHand,
                         Card extraPlayerCard, Card extraBankerCard,
-                        String gameWinner, Boolean newGame, double totalWinnings){
+                        String gameWinner, Boolean newGame, double totalWinnings,
+                        int playerGameWins, int bankerGameWins){
 
         this.playerHand = playerHand;
         this.bankerHand = bankerHand;
@@ -30,6 +33,8 @@ public class BaccaratInfo implements Serializable{
         this.gameWinner = gameWinner;
         this.newGame = newGame;
         this.totalWinnings = totalWinnings;
+        this.playerGameWins = playerGameWins;
+        this.bankerGameWins = bankerGameWins;
     }
 
 

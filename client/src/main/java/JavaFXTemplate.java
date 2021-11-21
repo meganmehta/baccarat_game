@@ -57,6 +57,9 @@ import javafx.scene.Group;
 import java.io.FileInputStream; 
 import java.io.FileNotFoundException; 
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.image.Image;
+
 
 
 
@@ -78,6 +81,8 @@ public class JavaFXTemplate extends Application {
 	Client clientConnection;
 	BaccaratInfo recastGame;
 	String gameWinner, userBetSelect;
+	TextArea results;
+	String p1c1Val, p1c1Suit, p1card1FP;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -121,14 +126,25 @@ public class JavaFXTemplate extends Application {
 						BaccaratInfo recastGame = (BaccaratInfo)gameInfo;
 						clientActions.add(gameInfo); //adds everything from BaccaratInfo once the game has ran
 						System.out.println("winner: " + recastGame.gameWinner);
-						items.add(recastGame.gameWinner.toString());
-						items.add(recastGame.userBetChoice.toString());
+						if (recastGame.gameWinner.equals(recastGame.userBetChoice)){
+								results.setText("Player Total: " + recastGame.playerGameWins + " Banker Total: " + recastGame.bankerGameWins +
+										"...." + recastGame.gameWinner +
+										" wins!" + " Congrats, you bet " + recastGame.userBetChoice + "! You win! ");
+							}
+							else{
+								results.setText("Player Total: "+ recastGame.playerGameWins + " Banker Total: "+ recastGame.bankerGameWins +
+										 "...."+ recastGame.gameWinner +
+										" wins!" + " Sorry, you bet " + recastGame.userBetChoice + "! You lost your bet!");
+
+							}
+						p1c1Val += Integer.toString(recastGame.playerHand.get(0).value);
+						p1c1Suit += recastGame.playerHand.get(0).suit;
+
 					});
 				});
 				clientConnection.start();
 		}});
 
-		items = new ArrayList<String>();
 
 		VBox allStuff = new VBox(50, welcome, portNumberBox, ipBox, connectBtn);
 		allStuff.setAlignment(Pos.CENTER);
@@ -158,26 +174,12 @@ public class JavaFXTemplate extends Application {
 		result1.setFont(new Font("Verdana", 12));
 		result1.setTextFill(Color.WHITE);
 
-		TextArea results = new TextArea("Game Results displayed here!");
+		results = new TextArea();
 		results.setPrefHeight(50);
 		results.setPrefWidth(50);
-		//display output message according to game results
-		//TO DO: find a way to keep track of how many wins a client has while playing
-
-		//results.setText(items);
-		/*if (items.get(0).equals(items.get(1))){
-			results.setText("Player Total: .. Banker Total: ..." + "...." + items.get(0) +
-					" wins!" + ". Congrats, you bet" + items.get(1) + "! You win! ");
-		}
-		else{
-			results.setText("Player Total: .. Banker Total:  ..." + "...."+ items.get(0) +
-					" wins!" + ". Sorry, you bet" + items.get(1) + "! You lost your bet!");
-		}*/
-
 
 		VBox resultSpace = new VBox(10,result1, results);
 		resultSpace.setAlignment(Pos.TOP_CENTER);
-
 
 		//create player space (include cards)
 		Label playSpace = new Label("Player Cards: ");
@@ -185,6 +187,13 @@ public class JavaFXTemplate extends Application {
 		playSpace.setFont(new Font("Verdana", 16));
 		playSpace.setTextFill(Color.WHITE);
 
+		//creating player cards - REPLICATE FOR ALL BANKER + PLAYER CARDS
+		Rectangle rec1 = new Rectangle(75,100);
+		p1c1Val = new String();
+		p1c1Suit = new String();
+		p1card1FP = p1c1Val + p1c1Suit + ".jpg";
+		rec1.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/cards/" + p1card1FP))));
+		HBox playerCards = new HBox(20, rec1);
 
 		//banker cards
 
@@ -194,12 +203,12 @@ public class JavaFXTemplate extends Application {
 		bankSpace.setFont(new Font("Verdana", 16));
 		bankSpace.setTextFill(Color.WHITE);
 		//Number and letter arrays for the image location path
-		String number[] = new String[]{"1","2","3","4","5","6","7","8","9","10","11","12","13"};
+		/*String number[] = new String[]{"1","2","3","4","5","6","7","8","9","10","11","12","13"};
 		String letter[] = new String[] {"C", "D", "H", "S"};
 		StackPane pics = new StackPane();
 		int posX = 0;
 		int posY = 0;
-		try{ 
+		try{
 			for(int i = 0; i < number.length; i++) {
 				for(int j = 0; j < letter.length; j++) {
 					FileInputStream inputstream = 
@@ -222,9 +231,9 @@ public class JavaFXTemplate extends Application {
 		}
 		catch(FileNotFoundException e) {
 			System.out.println("Something caught");
-		}
+		}*/
 		
-		VBox cardSpace = new VBox(30, playSpace, bankSpace, pics);
+		VBox cardSpace = new VBox(30, playSpace,playerCards, bankSpace); //pics
 
 		//------BID STUFF-------
 		//bid text field
@@ -255,7 +264,7 @@ public class JavaFXTemplate extends Application {
 		startBtn.setOnAction(event -> {
 			double betA = Double.valueOf(bid.getText());
 			BaccaratInfo gameInformation = new BaccaratInfo(betA, (String) bidDrop.getValue(),
-					null, null, null, null, null, false, 0);
+					null, null, null, null, null, false, 0, 0, 0);
 			clientConnection.send(gameInformation); //sends the choice of who the user bet on
 		});
 
@@ -270,7 +279,7 @@ public class JavaFXTemplate extends Application {
 			this.primaryStage.show();
 			//sends the choice of another game or not
 			BaccaratInfo gameInformation = new BaccaratInfo(0, null, null,
-					null, null, null, null, true, 0);
+					null, null, null, null, true, 0, 0, 0);
 			clientConnection.send(gameInformation);
 		});
 

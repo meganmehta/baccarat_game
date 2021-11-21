@@ -13,10 +13,10 @@ public class BaccaratDealer {
     //instance of the Card class in the ArrayList<Card> deck.
     public void generateDeck(){
         //add suit values to list
-        suits.add("Clubs");
-        suits.add("Diamonds");
-        suits.add("Hearts");
-        suits.add("Spades");
+        suits.add("C"); //Clubs
+        suits.add("D"); //Diamonds
+        suits.add("H"); //Hearts
+        suits.add("S"); //Spades
 
         //total cards
         int cardCount = 0;
