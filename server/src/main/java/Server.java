@@ -65,6 +65,7 @@ public class Server{
         BaccaratGame game;
         int playerWinCount;
         int bankerWinCount;
+        double userWinnings;
 
 
         ClientThread(Socket s, int count){
@@ -111,7 +112,7 @@ public class Server{
                         gameInfo.extraBankerCard = game.bankerECard;
                         gameInfo.gameWinner = game.winner;
                         System.out.println(gameInfo.gameWinner);
-                        gameInfo.totalWinnings = game.totalWinnings;
+                        gameInfo.winnings = game.totalWinnings;
                         //keeps track of all game results for client.
                         if (gameInfo.gameWinner.equals("Player")){
                             playerWinCount++;
@@ -123,6 +124,9 @@ public class Server{
                             gameInfo.bankerGameWins = bankerWinCount;
                             //callback.accept("Banker wins on Client #" + count + ": " + bankerWinCount);
                         }
+                        //keeps track of user total winnings
+                        userWinnings += gameInfo.winnings;
+                        gameInfo.totalWinnings = userWinnings;
                         out.writeObject(gameInfo); //sends all game info to client
                         // -------- SERVER MESSAGES --------
                         //The results of each game played by any client.

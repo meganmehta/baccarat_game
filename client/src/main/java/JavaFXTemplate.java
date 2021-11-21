@@ -68,7 +68,7 @@ public class JavaFXTemplate extends Application {
 	Button startBtn, connectBtn, exitBtn, playAgainBtn;
 	Stage primaryStage;
 	Scene introScene, gameScene;
-	Text welcome, playerWins;
+	Text welcome, playerWins, currentWinnings;
 	ArrayList<Serializable> clientActions;
 	ArrayList<String> items;
 	ListView actions;
@@ -139,7 +139,7 @@ public class JavaFXTemplate extends Application {
 							}
 						p1c1Val += Integer.toString(recastGame.playerHand.get(0).value);
 						p1c1Suit += recastGame.playerHand.get(0).suit;
-
+						currentWinnings.setText("" + recastGame.totalWinnings);
 					});
 				});
 				clientConnection.start();
@@ -188,12 +188,12 @@ public class JavaFXTemplate extends Application {
 		playSpace.setTextFill(Color.WHITE);
 
 		//creating player cards - REPLICATE FOR ALL BANKER + PLAYER CARDS
-		Rectangle rec1 = new Rectangle(75,100);
+		/*Rectangle rec1 = new Rectangle(75,100);
 		p1c1Val = new String();
 		p1c1Suit = new String();
 		p1card1FP = p1c1Val + p1c1Suit + ".jpg";
 		rec1.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/cards/" + p1card1FP))));
-		HBox playerCards = new HBox(20, rec1);
+		HBox playerCards = new HBox(20, rec1);*/
 
 		//banker cards
 
@@ -233,7 +233,7 @@ public class JavaFXTemplate extends Application {
 			System.out.println("Something caught");
 		}*/
 		
-		VBox cardSpace = new VBox(30, playSpace,playerCards, bankSpace); //pics
+		VBox cardSpace = new VBox(30, playSpace, bankSpace); //pics
 
 		//------BID STUFF-------
 		//bid text field
@@ -264,7 +264,7 @@ public class JavaFXTemplate extends Application {
 		startBtn.setOnAction(event -> {
 			double betA = Double.valueOf(bid.getText());
 			BaccaratInfo gameInformation = new BaccaratInfo(betA, (String) bidDrop.getValue(),
-					null, null, null, null, null, false, 0, 0, 0);
+					null, null, null, null, null, false, 0, 0, 0, 0);
 			clientConnection.send(gameInformation); //sends the choice of who the user bet on
 		});
 
@@ -279,7 +279,7 @@ public class JavaFXTemplate extends Application {
 			this.primaryStage.show();
 			//sends the choice of another game or not
 			BaccaratInfo gameInformation = new BaccaratInfo(0, null, null,
-					null, null, null, null, true, 0, 0, 0);
+					null, null, null, null, true, 0, 0, 0, 0);
 			clientConnection.send(gameInformation);
 		});
 
@@ -292,7 +292,7 @@ public class JavaFXTemplate extends Application {
 		playerWins.setFill(Color.WHITE);
 		playerWins.setStyle("-fx-font-weight: bold");
 		
-		Text currentWinnings = new Text("$$$");
+		currentWinnings = new Text();
 		currentWinnings.setFill(Color.WHITE);
 		currentWinnings.setStyle("-fx-font-weight: bold; -fx-padding: 50 0 0 0;");
 
