@@ -1,7 +1,7 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 
-//BaccaratInfo class for Client
+//BaccaratInfo class for Server
 public class BaccaratInfo implements Serializable{
     double betAmount;
     String userBetChoice;
@@ -9,13 +9,17 @@ public class BaccaratInfo implements Serializable{
     ArrayList<Card> bankerHand = new ArrayList<Card>();;
     Card extraPlayerCard;
     Card extraBankerCard;
+    String winner;
+    Boolean newGame;
+    double totalWinnings;
 
     //When a client connects to the server, the server will wait to receive a message from the
     //client to play. That message should include the amount they bet and what they bet on:
     //Banker, Player or Draw
     public BaccaratInfo(double betAmount, String userBetChoice,
                         ArrayList<Card> playerHand, ArrayList<Card> bankerHand,
-                        Card extraPlayerCard, Card extraBankerCard){
+                        Card extraPlayerCard, Card extraBankerCard,
+                        String winner, Boolean newGame, double totalWinnings){
 
         this.playerHand = playerHand;
         this.bankerHand = bankerHand;
@@ -23,20 +27,10 @@ public class BaccaratInfo implements Serializable{
         this.extraPlayerCard = this.extraPlayerCard;
         this.betAmount = betAmount;
         this.userBetChoice = userBetChoice;
+        this.winner = winner;
+        this.newGame = newGame;
+        this.totalWinnings = totalWinnings;
     }
 
-
-
-
-    //list has to inclue:
-    //- how many clients are connected to the server.
-    //- The results of each game played by any client.
-    //- how much the a client bet on each game
-    //- how much a client won or lost on each game
-    //- if a client drops off the server.
-    //- if a new client joins the server.
-    //- is the client playing another hand.
-
-    //use clientConnection.send(c1.getText())?
 
 }

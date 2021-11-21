@@ -22,7 +22,7 @@ public class BaccaratGameLogic {
         else if (playerScore == 8 || playerScore == 9){
             result =  "Player";
         }
-
+        System.out.println(result);
         return result;
 
     }

@@ -39,7 +39,7 @@ public class BaccaratGame {
 			bankerHand.add(bankerECard);
 		}
 
-    	String winner = logic.whoWon(playerHand, bankerHand);
+    	this.winner = logic.whoWon(playerHand, bankerHand);
 
 		//determine winnings
 		if (winner == "Player"){
@@ -47,7 +47,7 @@ public class BaccaratGame {
 				totalWinnings += currentBet;
 			}
 			else{
-				totalWinnings += 0;
+				totalWinnings -= currentBet;
 			}
 		}
 		else if (winner == "Banker"){
@@ -55,15 +55,15 @@ public class BaccaratGame {
 				totalWinnings += currentBet;
 			}
 			else{
-				totalWinnings += 0;
+				totalWinnings -= currentBet;
 			}
 		}
 		else if (winner == "Draw"){
 			if (betOn == "Player"){
-				totalWinnings += currentBet;
+				totalWinnings -= currentBet;
 			}
 			else if (betOn == "Banker"){
-				totalWinnings += currentBet;
+				totalWinnings -= currentBet;
 			}
 		}
 

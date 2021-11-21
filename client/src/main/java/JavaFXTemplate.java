@@ -58,7 +58,7 @@ import javafx.scene.control.TextArea;
 
 public class JavaFXTemplate extends Application {
 	HashMap<String, Scene> sceneMap;
-	Button startBtn, connectBtn, exitBtn;
+	Button startBtn, connectBtn, exitBtn;//, playAgainBtn;
 	Stage primaryStage;
 	Scene introScene, gameScene;
 	Text welcome, playerWins;
@@ -71,14 +71,13 @@ public class JavaFXTemplate extends Application {
 	ComboBox bidDrop;
 	Rectangle playerSpace, bankerSpace;
 	Client clientConnection;
-
+	BaccaratInfo recastGame;
+	String gameWinner, userBetSelect;
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		launch(args);
 	}
 
-	//feel free to remove the starter code from this method
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		sceneMap = new HashMap<String,Scene>();
@@ -106,7 +105,7 @@ public class JavaFXTemplate extends Application {
 		connectBtn = new Button("Connect to Server");
 		connectBtn.setStyle("-fx-background-color: yellow; ");
 
-		clientActions = new ArrayList<Serializable>(); //list view with all client actions
+		clientActions = new ArrayList<Serializable>(); //list view with all client variables (from BaccaratInfo)
 		//when startBtn is clicked, switch to gameActionsScreen when theres stuff in the text field
 		connectBtn.setOnAction(e -> {
 			if(t1.getText() != "" && t2.getText() != "") {
@@ -115,7 +114,9 @@ public class JavaFXTemplate extends Application {
 					Platform.runLater(()->{
 						//recast
 						BaccaratInfo recastGame = (BaccaratInfo)gameInfo;
-						clientActions.add(gameInfo);
+						clientActions.add(gameInfo); //adds everything from BaccaratInfo once the game has ran
+						userBetSelect = (String) recastGame.userBetChoice;
+						gameWinner = (String) recastGame.winner;
 					});
 				});
 				clientConnection.start();
@@ -135,7 +136,6 @@ public class JavaFXTemplate extends Application {
 
 		//add any styline elements in this function
 		introScene.getRoot().setStyle("-fx-background-color: pink;-fx-font-family: 'verdana';");
-		
 
 		primaryStage.setScene(introScene);
 		primaryStage.show();
@@ -150,10 +150,19 @@ public class JavaFXTemplate extends Application {
 		result1.setFont(new Font("Verdana", 12));
 		result1.setTextFill(Color.WHITE);
 
-		TextArea results = new TextArea("");
+		TextArea results = new TextArea("Game Results displayed here!");
 		results.setPrefHeight(50);
 		results.setPrefWidth(50);
-		results.setText("Player Total: 7 Banker Total 5!" + " Player wins!" + " Sorry, you bet Draw! You lost your bet!");
+		//display output message according to game results
+		//TO DO: find a way to keep track of how many wins a client has while playing
+		if (gameWinner != userBetSelect){
+			results.setText("Player Total: .. Banker Total:  ..." + "...."+ gameWinner +
+					" wins!" + ". Sorry, you bet" + userBetSelect + "! You lost your bet!");
+		}
+		else{
+			results.setText("Player Total: .. Banker Total: ..." + "...." + gameWinner +
+					" wins!" + ". Congrats, you bet" + userBetSelect + "! You win! ");
+		}
 
 		VBox resultSpace = new VBox(10,result1, results);
 		resultSpace.setAlignment(Pos.TOP_CENTER);
@@ -203,7 +212,6 @@ public class JavaFXTemplate extends Application {
 		bidDrop.getItems().add("Banker");
 		bidDrop.getItems().add("Draw");
 		HBox bidMenu = new HBox(bidDropLab, bidDrop);
-		//String value = (String) comboBox.getValue(); -> how to get selection value in ComboBox
 
 		//*create vertical box for bid amount + bidding on selection
 		VBox bidStuff = new VBox(10, bidBox, bidMenu);
@@ -211,21 +219,30 @@ public class JavaFXTemplate extends Application {
 
 		//create actions bar at bottom of game screen
 		//-----GAME CONTROLS------
-		//*start + end game buttons
 		startBtn = new Button("Start Game");
-		//Starts a new game when pressed
 		startBtn.setOnAction(event -> {
 			double betA = Double.valueOf(bid.getText());
-			BaccaratInfo gameInformation = new BaccaratInfo(betA, (String) bidDrop.getValue(), null, null, null, null);
+			BaccaratInfo gameInformation = new BaccaratInfo(betA, (String) bidDrop.getValue(),
+					null, null, null, null, null, null, 0);
 			clientConnection.send(gameInformation); //sends the choice of who the user bet on
 		});
 
 		exitBtn = new Button("Exit");
-		//Exits the game when pressed
 		exitBtn.setOnAction(event -> {
-			//FIX so that in server output, it shows which client left
 			Platform.exit();
 		});
+
+		/*playAgainBtn = new Button("Play Again!");
+		playAgainBtn.setOnAction(event -> {
+			this.primaryStage.setScene(createGameScene());
+			this.primaryStage.show();
+			//sends the choice of another game or not
+			Boolean playAnother = true;
+			BaccaratInfo gameInformation = new BaccaratInfo(0, null, null,
+					null, null, null, null, playAnother, 0);
+			clientConnection.send(gameInformation);
+		});*/
+
 		VBox gameControls = new VBox(10, startBtn, exitBtn);
 		gameControls.setAlignment(Pos.TOP_CENTER);
 

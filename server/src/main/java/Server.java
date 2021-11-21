@@ -36,8 +36,10 @@ public class Server{
                 while(true) {
 
                     ClientThread c = new ClientThread(mysocket.accept(), count);
+                    //if a new client joins the server.
                     callback.accept("New client has connected to server: " + "Client #" + count);
                     clients.add(c);
+                    //update the total number of clients connected to server
                     callback.accept("Number of clients connected to server: " + clients.size()); //how many clients are connected to the server.
                     c.start();
 
@@ -49,15 +51,6 @@ public class Server{
                 callback.accept("Server socket did not launch");
             }
         }//end of while
-
-        /*public void send(BaccaratInfo gameStuff) {
-
-            try {
-                //out.writeObject(gameStuff);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }*/
 
     }
 
@@ -95,10 +88,10 @@ public class Server{
                 try {
                     BaccaratInfo gameInfo = (BaccaratInfo) in.readObject();
                     String amount = String.valueOf(gameInfo.betAmount);
-                    //outputs message with client bet info
+                    //outputs message with client bet info - how much the a client bet on each game
                     callback.accept("Client #" + count + " bet $" +
                             amount + " on " + gameInfo.userBetChoice);
-                    //plays game on backend
+                    //plays game on backend + assign game variables to serializable variables
                     game.setBetAmount(gameInfo.betAmount);
                     game.setBetOn(gameInfo.userBetChoice);
                     double winnings = game.evaluateWinnings();
@@ -106,13 +99,32 @@ public class Server{
                     gameInfo.bankerHand = game.bankerHand;
                     gameInfo.extraPlayerCard = game.playerECard;
                     gameInfo.extraBankerCard = game.bankerECard;
-                    out.writeObject(gameInfo); //sending to client
-                    callback.accept("Client #" + count + "won" + winnings);
+                    gameInfo.winner = game.winner;
+                    gameInfo.totalWinnings = game.totalWinnings;
+                    out.writeObject(gameInfo); //sends all game info to client
+
+                    // -------- SERVER MESSAGES --------
+                    //The results of each game played by any client.
+                    callback.accept("Client #" + count + " Game Results: " + gameInfo.winner + " won!");
+                    //how much a client won or lost on each game
+                    if (gameInfo.userBetChoice == gameInfo.winner){
+                        callback.accept("Client #" + count + " won $" + gameInfo.betAmount + " on this game!");
+                    }
+                    else{
+                        callback.accept("Client #" + count + " lost $" + gameInfo.betAmount + " on this game.");
+                    }
+                    //is the client playing another hand.
+                    if (gameInfo.newGame == true){
+                        callback.accept("Client # " + count + "is playing another hand.");
+                    }
 
                 }
                 catch(Exception e) {
+                    System.out.println(e);
+                    //if a client drops off the server.
                     callback.accept("Client #"+ count +" has left the server!");
                     clients.remove(this);
+                    //how many clients are connected to the server.
                     callback.accept("Number of clients connected to server: " + clients.size()); //how many clients are connected to the server.
                     break;
                 }
