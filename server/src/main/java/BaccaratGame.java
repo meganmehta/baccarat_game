@@ -43,27 +43,27 @@ public class BaccaratGame {
 		System.out.println(this.winner);
 
 		//determine winnings
-		if (winner == "Player"){
-			if (betOn == "Player"){
+		if (winner.equals("Player")){
+			if (betOn.equals("Player")){
 				totalWinnings += currentBet;
 			}
 			else{
 				totalWinnings -= currentBet;
 			}
 		}
-		else if (winner == "Banker"){
-			if (betOn == "Banker"){
+		else if (winner.equals("Banker")){
+			if (betOn.equals("Banker")){
 				totalWinnings += currentBet;
 			}
 			else{
 				totalWinnings -= currentBet;
 			}
 		}
-		else if (winner == "Draw"){
-			if (betOn == "Player"){
+		else if (winner.equals("Draw")){
+			if (betOn.equals("Player")){
 				totalWinnings -= currentBet;
 			}
-			else if (betOn == "Banker"){
+			else if (betOn.equals("Banker")){
 				totalWinnings -= currentBet;
 			}
 		}

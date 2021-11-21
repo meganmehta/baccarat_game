@@ -85,8 +85,8 @@ public class JavaFXTemplate extends Application {
 	TextArea results;
 	String p1c1Val, p1c1Suit, p1card1FP, p1c2Val, p1c2Suit, p1card2FP, p1c3Val, p1c3Suit, p1card3FP,
 			b1c1Val, b1c1Suit, b1card1FP, b1c2Val, b1c2Suit, b1card2FP, b1c3Val, b1c3Suit, b1card3FP;
-	int bankerWinsStats, playerWinsStats;
-	//BaccaratInfo gameInfo;
+	int bankerWinsStats = 0, playerWinsStats = 0;
+	double playerWinnings = 0;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -119,8 +119,7 @@ public class JavaFXTemplate extends Application {
 		connectBtn = new Button("Connect to Server");
 		connectBtn.setStyle("-fx-background-color: yellow; ");
 
-		playerWinsStats = 0;
-		bankerWinsStats = 0;
+
 		clientActions = new ArrayList<Serializable>(); //list view with all client variables (from BaccaratInfo)
 		//when startBtn is clicked, switch to gameActionsScreen when theres stuff in the text field
 		connectBtn.setOnAction(e -> {
@@ -134,6 +133,7 @@ public class JavaFXTemplate extends Application {
 						System.out.println("winner: " + recastGame.gameWinner);
 						this.bankerWinsStats = recastGame.bankerGameWins;
 						this.playerWinsStats = recastGame.playerGameWins;
+						this.playerWinnings = recastGame.totalWinnings;
 						if (recastGame.gameWinner.equals(recastGame.userBetChoice)){
 								results.setText("Player Total: " + recastGame.playerGameWins + " Banker Total: " + recastGame.bankerGameWins +
 										"\n" + recastGame.gameWinner +
@@ -312,7 +312,7 @@ public class JavaFXTemplate extends Application {
 		startBtn.setOnAction(event -> {
 			double betA = Double.valueOf(bid.getText());
 			BaccaratInfo gameInformation = new BaccaratInfo(betA, (String) bidDrop.getValue(),
-					null, null, null, null, null, false, 0, 0, 0, 0);
+					null, null, null, null, null, false, 0, this.playerWinsStats, this.bankerWinsStats, this.playerWinnings);
 			clientConnection.send(gameInformation); //sends the choice of who the user bet on
 			startBtn.setDisable(true);
 		});
@@ -327,8 +327,9 @@ public class JavaFXTemplate extends Application {
 			this.primaryStage.setScene(createGameScene());
 			this.primaryStage.show();
 			//sends the choice of another game or not
+			System.out.println(this.playerWinsStats + "," + this.bankerWinsStats);
 			BaccaratInfo gameInformation = new BaccaratInfo(0, null, null,
-					null, null, null, null, true, 0, this.playerWinsStats, this.bankerWinsStats, 0);
+					null, null, null, null, true, 0, this.playerWinsStats, this.bankerWinsStats, this.playerWinnings);
 			clientConnection.send(gameInformation);
 		});
 

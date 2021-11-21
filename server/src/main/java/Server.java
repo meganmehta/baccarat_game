@@ -93,7 +93,7 @@ public class Server{
                     if (gameInfo.newGame){
                         Thread.sleep(2000);
                         game = new BaccaratGame();
-                        callback.accept("Client # " + count + " is playing another hand.");
+                        callback.accept("Client #" + count + " is playing another hand.");
                     }
                     else{
                         String amount = String.valueOf(gameInfo.betAmount);
@@ -117,16 +117,19 @@ public class Server{
                         if (gameInfo.gameWinner.equals("Player")){
                             this.playerWinCount++;
                             gameInfo.playerGameWins = this.playerWinCount;
+                            System.out.println(this.playerWinCount);
                             //callback.accept("Player wins on Client #" + count + ": " + playerWinCount);
                         }
                         else if (gameInfo.gameWinner.equals("Banker")){
                             this.bankerWinCount++;
                             gameInfo.bankerGameWins = this.bankerWinCount;
+                            System.out.println(this.bankerWinCount);
                             //callback.accept("Banker wins on Client #" + count + ": " + bankerWinCount);
                         }
                         //keeps track of user total winnings
                         this.userWinnings += gameInfo.winnings;
                         gameInfo.totalWinnings = this.userWinnings;
+                        System.out.println(this.userWinnings);
                         out.writeObject(gameInfo); //sends all game info to client
 
                         // -------- SERVER MESSAGES --------

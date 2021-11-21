@@ -33,7 +33,7 @@ class MyTest {
 
 	@Test
 	void generateDeckTest2() {
-		assertEquals("Spades", dealer.suits.get(3), "generate not working");
+		assertEquals("S", dealer.suits.get(3), "generate not working");
 	}
 
 	@Test
@@ -63,14 +63,14 @@ class MyTest {
 	@Test
 	void shuffleDeckTest1() {
 		dealer.shuffleDeck();
-		Card test = new Card("Clubs", 1); //check to see if first card is different
+		Card test = new Card("C", 1); //check to see if first card is different
 		assertNotEquals(test, dealer.deck.get(0), "shuffleDeck not working");
 	}
 
 	@Test
 	void shuffleDeckTest2() {
 		dealer.shuffleDeck();
-		Card test = new Card("Spades", 13); //check to see if last card is different
+		Card test = new Card("S", 13); //check to see if last card is different
 		assertNotEquals(test, dealer.deck.get(51), "shuffleDeck not working");
 	}
 
@@ -92,8 +92,8 @@ class MyTest {
 	//testing BaccaratGameLogic
 	@Test
 	void handTotalTest1() {
-		Card testCard1 = new Card("Spades", 4);
-		Card testCard2 = new Card("Hearts", 11);
+		Card testCard1 = new Card("S", 4);
+		Card testCard2 = new Card("H", 11);
 		ArrayList<Card> testHand = new ArrayList<Card>();
 		testHand.add(testCard1);
 		testHand.add(testCard2);
@@ -104,8 +104,8 @@ class MyTest {
 
 	@Test
 	void handTotalTest2() {
-		Card testCard1 = new Card("Spades", 1);
-		Card testCard2 = new Card("Clubs", 9);
+		Card testCard1 = new Card("S", 1);
+		Card testCard2 = new Card("C", 9);
 		ArrayList<Card> testHand = new ArrayList<Card>();
 		testHand.add(testCard1);
 		testHand.add(testCard2);
@@ -115,8 +115,8 @@ class MyTest {
 
 	@Test
 	void evaluatePlayerDrawTest1() {
-		Card testCard1 = new Card("Spades", 4);
-		Card testCard2 = new Card("Hearts", 11);
+		Card testCard1 = new Card("S", 4);
+		Card testCard2 = new Card("H", 11);
 		ArrayList<Card> testHand = new ArrayList<Card>();
 		testHand.add(testCard1);
 		testHand.add(testCard2);
@@ -128,8 +128,8 @@ class MyTest {
 
 	@Test
 	void evaluatePlayerDrawTest2()  {
-		Card testCard1 = new Card("Spades", 3);
-		Card testCard2 = new Card("Clubs", 3);
+		Card testCard1 = new Card("S", 3);
+		Card testCard2 = new Card("C", 3);
 		ArrayList<Card> testHand = new ArrayList<Card>();
 		testHand.add(testCard1);
 		testHand.add(testCard2);
@@ -139,12 +139,12 @@ class MyTest {
 
 	@Test
 	void evaluateBankerDrawTest1() {
-		Card testCard1 = new Card("Spades", 1);
-		Card testCard2 = new Card("Hearts", 11);
+		Card testCard1 = new Card("S", 1);
+		Card testCard2 = new Card("H", 11);
 		ArrayList<Card> testHand = new ArrayList<Card>();
 		testHand.add(testCard1);
 		testHand.add(testCard2);
-		Card playerCard = new Card("Clubs", 3);
+		Card playerCard = new Card("C", 3);
 		boolean testEval = logic.evaluateBankerDraw(testHand, playerCard);
 		//1 point means true, ignore playerCard val
 		assertEquals(true, testEval, "evaluateBankerDraw not working");
@@ -153,12 +153,12 @@ class MyTest {
 
 	@Test
 	void evaluateBankerDrawTest2()  {
-		Card testCard1 = new Card("Spades", 3);
-		Card testCard2 = new Card("Clubs", 3);
+		Card testCard1 = new Card("S", 3);
+		Card testCard2 = new Card("C", 3);
 		ArrayList<Card> testHand = new ArrayList<Card>();
 		testHand.add(testCard1);
 		testHand.add(testCard2);
-		Card playerCard = new Card("Clubs", 7);
+		Card playerCard = new Card("C", 7);
 		//banker score = 6, player card val = 7 -> should be true
 		boolean testEval = logic.evaluateBankerDraw(testHand, playerCard);
 		assertEquals(true, testEval, "evaluateBankerDraw not working" );
@@ -166,14 +166,14 @@ class MyTest {
 
 	@Test
 	void whoWonTest1()  {
-		Card h1testCard1 = new Card("Spades", 3);
-		Card h1testCard2 = new Card("Clubs", 3);
+		Card h1testCard1 = new Card("S", 3);
+		Card h1testCard2 = new Card("C", 3);
 		ArrayList<Card> testHand1 = new ArrayList<Card>();
 		testHand1.add(h1testCard1);
 		testHand1.add(h1testCard2);
 
-		Card h2testCard1 = new Card("Spades", 3);
-		Card h2testCard2 = new Card("Hearts", 5);
+		Card h2testCard1 = new Card("S", 3);
+		Card h2testCard2 = new Card("H", 5);
 		ArrayList<Card> testHand2 = new ArrayList<Card>();
 		testHand2.add(h2testCard1);
 		testHand2.add(h2testCard2);
@@ -185,14 +185,14 @@ class MyTest {
 
 	@Test
 	void whoWonTest2()  {
-		Card h1testCard1 = new Card("Spades", 8);
-		Card h1testCard2 = new Card("Clubs", 11);
+		Card h1testCard1 = new Card("S", 8);
+		Card h1testCard2 = new Card("C", 11);
 		ArrayList<Card> testHand1 = new ArrayList<Card>();
 		testHand1.add(h1testCard1);
 		testHand1.add(h1testCard2);
 
-		Card h2testCard1 = new Card("Spades", 4);
-		Card h2testCard2 = new Card("Hearts", 4);
+		Card h2testCard1 = new Card("S", 4);
+		Card h2testCard2 = new Card("H", 4);
 		ArrayList<Card> testHand2 = new ArrayList<Card>();
 		testHand2.add(h2testCard1);
 		testHand2.add(h2testCard2);

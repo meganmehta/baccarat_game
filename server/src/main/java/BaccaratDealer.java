@@ -37,10 +37,10 @@ public class BaccaratDealer {
     public ArrayList<Card> dealHand(){
         ArrayList<Card> hand = new ArrayList<Card>();
         shuffleDeck();
-        hand.add(deck.get(deck.size() - 1)); //add last card in shuffled deck
-        deck.remove(deck.size() - 1); //remove card from deck
-        hand.add(deck.get(deck.size() - 1));
-        deck.remove(deck.size() - 1);
+        hand.add(deck.get(this.deck.size() - 1)); //add last card in shuffled deck
+        deck.remove(this.deck.size() - 1); //remove card from deck
+        hand.add(deck.get(this.deck.size() - 1));
+        deck.remove(this.deck.size() - 1);
         return hand;
 
     };
@@ -48,7 +48,7 @@ public class BaccaratDealer {
     //drawOne will deal a single card and return it.
     public Card drawOne(){
         Random rand = new Random();
-        int num = rand.nextInt(52); //gets random integer
+        int num = rand.nextInt(deck.size()-1) + 1; //gets random integer
         Card returnCard = deck.get(num);
         deck.remove(num);
         return returnCard; //do we delete card from deck after it's been returned?
