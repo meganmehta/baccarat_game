@@ -115,19 +115,20 @@ public class Server{
                         gameInfo.winnings = game.totalWinnings;
                         //keeps track of all game results for client.
                         if (gameInfo.gameWinner.equals("Player")){
-                            playerWinCount++;
-                            gameInfo.playerGameWins = playerWinCount;
+                            this.playerWinCount++;
+                            gameInfo.playerGameWins = this.playerWinCount;
                             //callback.accept("Player wins on Client #" + count + ": " + playerWinCount);
                         }
                         else if (gameInfo.gameWinner.equals("Banker")){
-                            bankerWinCount++;
-                            gameInfo.bankerGameWins = bankerWinCount;
+                            this.bankerWinCount++;
+                            gameInfo.bankerGameWins = this.bankerWinCount;
                             //callback.accept("Banker wins on Client #" + count + ": " + bankerWinCount);
                         }
                         //keeps track of user total winnings
-                        userWinnings += gameInfo.winnings;
-                        gameInfo.totalWinnings = userWinnings;
+                        this.userWinnings += gameInfo.winnings;
+                        gameInfo.totalWinnings = this.userWinnings;
                         out.writeObject(gameInfo); //sends all game info to client
+
                         // -------- SERVER MESSAGES --------
                         //The results of each game played by any client.
                         Thread.sleep(2000);

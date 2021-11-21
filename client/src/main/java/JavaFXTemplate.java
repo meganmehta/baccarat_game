@@ -4,7 +4,8 @@ import javafx.scene.Scene;
 
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
+import java.util.*;
+import java.lang.*;
 import java.util.ArrayList;
 import java.io.Serializable;
 
@@ -77,12 +78,15 @@ public class JavaFXTemplate extends Application {
 	VBox allStuff, gameControls, bidStuff, cardSpace;
 	HBox portNumberBox, ipBox, playerActionsBox, bidMenu, bidBox;
 	ComboBox bidDrop;
-	Rectangle playerSpace, bankerSpace;
+	Rectangle playerSpace, bankerSpace, rec1, rec2, rec3, rec4, rec5, rec6;
 	Client clientConnection;
 	BaccaratInfo recastGame;
 	String gameWinner, userBetSelect;
 	TextArea results;
-	String p1c1Val, p1c1Suit, p1card1FP;
+	String p1c1Val, p1c1Suit, p1card1FP, p1c2Val, p1c2Suit, p1card2FP, p1c3Val, p1c3Suit, p1card3FP,
+			b1c1Val, b1c1Suit, b1card1FP, b1c2Val, b1c2Suit, b1card2FP, b1c3Val, b1c3Suit, b1card3FP;
+	int bankerWinsStats, playerWinsStats;
+	//BaccaratInfo gameInfo;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -115,6 +119,8 @@ public class JavaFXTemplate extends Application {
 		connectBtn = new Button("Connect to Server");
 		connectBtn.setStyle("-fx-background-color: yellow; ");
 
+		playerWinsStats = 0;
+		bankerWinsStats = 0;
 		clientActions = new ArrayList<Serializable>(); //list view with all client variables (from BaccaratInfo)
 		//when startBtn is clicked, switch to gameActionsScreen when theres stuff in the text field
 		connectBtn.setOnAction(e -> {
@@ -126,20 +132,66 @@ public class JavaFXTemplate extends Application {
 						BaccaratInfo recastGame = (BaccaratInfo)gameInfo;
 						clientActions.add(gameInfo); //adds everything from BaccaratInfo once the game has ran
 						System.out.println("winner: " + recastGame.gameWinner);
+						this.bankerWinsStats = recastGame.bankerGameWins;
+						this.playerWinsStats = recastGame.playerGameWins;
 						if (recastGame.gameWinner.equals(recastGame.userBetChoice)){
 								results.setText("Player Total: " + recastGame.playerGameWins + " Banker Total: " + recastGame.bankerGameWins +
-										"...." + recastGame.gameWinner +
-										" wins!" + " Congrats, you bet " + recastGame.userBetChoice + "! You win! ");
+										"\n" + recastGame.gameWinner +
+										" wins!\n" + "Congrats, you bet " + recastGame.userBetChoice + "! You win! ");
 							}
 							else{
 								results.setText("Player Total: "+ recastGame.playerGameWins + " Banker Total: "+ recastGame.bankerGameWins +
-										 "...."+ recastGame.gameWinner +
-										" wins!" + " Sorry, you bet " + recastGame.userBetChoice + "! You lost your bet!");
+										 "\n"+ recastGame.gameWinner +
+										" wins!\n" + "Sorry, you bet " + recastGame.userBetChoice + "! You lost your bet!");
 
 							}
+
+						//adds pictures to cards
 						p1c1Val += Integer.toString(recastGame.playerHand.get(0).value);
 						p1c1Suit += recastGame.playerHand.get(0).suit;
+						System.out.println(p1c1Val);
+						p1card1FP = p1c1Val + p1c1Suit + ".jpg";
+						rec1.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/cards/" + p1card1FP))));
+
+						p1c2Val += Integer.toString(recastGame.playerHand.get(1).value);
+						p1c2Suit += recastGame.playerHand.get(1).suit;
+						System.out.println(p1c2Val);
+						p1card2FP = p1c2Val + p1c2Suit + ".jpg";
+						rec2.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/cards/" + p1card2FP))));
+
+						if (recastGame.playerHand.size() > 2){
+							p1c3Val += Integer.toString(recastGame.playerHand.get(0).value);
+							p1c3Suit += recastGame.playerHand.get(0).suit;
+							System.out.println(p1c3Val);
+							p1card3FP = p1c3Val + p1c3Suit + ".jpg";
+							rec3.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/cards/" + p1card3FP))));
+
+						}
+
+						b1c1Val += Integer.toString(recastGame.bankerHand.get(0).value);
+						b1c1Suit += recastGame.bankerHand.get(0).suit;
+						System.out.println(b1c1Val);
+						b1card1FP = b1c1Val + b1c1Suit + ".jpg";
+						rec4.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/cards/" + b1card1FP))));
+
+						b1c2Val += Integer.toString(recastGame.bankerHand.get(0).value);
+						b1c2Suit += recastGame.bankerHand.get(0).suit;
+						System.out.println(b1c2Val);
+						b1card2FP = b1c2Val + b1c2Suit + ".jpg";
+						rec5.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/cards/" + b1card2FP))));
+
+						if (recastGame.playerHand.size() > 2) {
+							b1c3Val += Integer.toString(recastGame.bankerHand.get(0).value);
+							b1c3Suit += recastGame.bankerHand.get(0).suit;
+							System.out.println(b1c3Val);
+							b1card3FP = b1c3Val + b1c3Suit + ".jpg";
+							rec6.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/cards/" + b1card3FP))));
+						}
+
+						//updates total winnings, including recent bet
 						currentWinnings.setText("" + recastGame.totalWinnings);
+
+
 					});
 				});
 				clientConnection.start();
@@ -175,8 +227,8 @@ public class JavaFXTemplate extends Application {
 		result1.setTextFill(Color.WHITE);
 
 		results = new TextArea();
-		results.setPrefHeight(50);
-		results.setPrefWidth(50);
+		results.setPrefHeight(400);
+		results.setPrefWidth(400);
 
 		VBox resultSpace = new VBox(10,result1, results);
 		resultSpace.setAlignment(Pos.TOP_CENTER);
@@ -187,53 +239,49 @@ public class JavaFXTemplate extends Application {
 		playSpace.setFont(new Font("Verdana", 16));
 		playSpace.setTextFill(Color.WHITE);
 
-		//creating player cards - REPLICATE FOR ALL BANKER + PLAYER CARDS
-		/*Rectangle rec1 = new Rectangle(75,100);
-		p1c1Val = new String();
-		p1c1Suit = new String();
-		p1card1FP = p1c1Val + p1c1Suit + ".jpg";
-		rec1.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/cards/" + p1card1FP))));
-		HBox playerCards = new HBox(20, rec1);*/
+		//creating player cards
+		rec1 = new Rectangle(75,100);
+		p1c1Val = new String("");
+		p1c1Suit = new String("");
+		p1card1FP = new String("");
 
-		//banker cards
+		rec2 = new Rectangle(75,100);
+		p1c2Val = new String("");
+		p1c2Suit = new String("");
+		p1card2FP = new String("");
+
+		rec3 = new Rectangle(75,100);
+		p1c3Val = new String("");
+		p1c3Suit = new String("");
+		p1card3FP = new String("");
+
+		HBox playerCards = new HBox(20, rec1, rec2, rec3);
 
 		//create banker space (include spaces for cards)
 		Label bankSpace = new Label("Banker Cards: ");
 		bankSpace.setStyle("-fx-font-weight: bold");
 		bankSpace.setFont(new Font("Verdana", 16));
 		bankSpace.setTextFill(Color.WHITE);
-		//Number and letter arrays for the image location path
-		/*String number[] = new String[]{"1","2","3","4","5","6","7","8","9","10","11","12","13"};
-		String letter[] = new String[] {"C", "D", "H", "S"};
-		StackPane pics = new StackPane();
-		int posX = 0;
-		int posY = 0;
-		try{
-			for(int i = 0; i < number.length; i++) {
-				for(int j = 0; j < letter.length; j++) {
-					FileInputStream inputstream = 
-							new FileInputStream("C:\\Users\\rezar\\Downloads\\baccarat_game\\client\\src\\main\\resources\\cards\\" + number[i] + letter[j] + ".jpg");
-					Image image = new Image(inputstream); 
-					ImageView imageView = new ImageView(image);
-					//Setting the position of the image 
-					imageView.setX(posX+=50); 
-					imageView.setY(posY+=25); 
-		    
-					//setting the fit height and width of the image view 
-					imageView.setFitHeight(100); 
-					imageView.setFitWidth(100); 
-		      
-					//Setting the preserve ratio of the image view 
-					imageView.setPreserveRatio(true);  
-					pics.getChildren().add(imageView);
-				}
-			}
-		}
-		catch(FileNotFoundException e) {
-			System.out.println("Something caught");
-		}*/
-		
-		VBox cardSpace = new VBox(30, playSpace, bankSpace); //pics
+
+		//banker cards
+		rec4 = new Rectangle(75,100);
+		b1c1Val = new String("");
+		b1c1Suit = new String("");
+		b1card1FP = new String("");
+
+		rec5 = new Rectangle(75,100);
+		b1c2Val = new String("");
+		b1c2Suit = new String("");
+		b1card2FP = new String("");
+
+		rec6 = new Rectangle(75,100);
+		b1c3Val = new String("");
+		b1c3Suit = new String("");
+		b1card3FP = new String("");
+
+		HBox bankerCards = new HBox(20, rec4, rec5, rec6);
+
+		VBox cardSpace = new VBox(30, playSpace, playerCards, bankSpace, bankerCards);
 
 		//------BID STUFF-------
 		//bid text field
@@ -266,6 +314,7 @@ public class JavaFXTemplate extends Application {
 			BaccaratInfo gameInformation = new BaccaratInfo(betA, (String) bidDrop.getValue(),
 					null, null, null, null, null, false, 0, 0, 0, 0);
 			clientConnection.send(gameInformation); //sends the choice of who the user bet on
+			startBtn.setDisable(true);
 		});
 
 		exitBtn = new Button("Exit");
@@ -279,7 +328,7 @@ public class JavaFXTemplate extends Application {
 			this.primaryStage.show();
 			//sends the choice of another game or not
 			BaccaratInfo gameInformation = new BaccaratInfo(0, null, null,
-					null, null, null, null, true, 0, 0, 0, 0);
+					null, null, null, null, true, 0, this.playerWinsStats, this.bankerWinsStats, 0);
 			clientConnection.send(gameInformation);
 		});
 
@@ -304,8 +353,8 @@ public class JavaFXTemplate extends Application {
 
 		BorderPane root = new BorderPane();
 		root.setPadding(new Insets(50));
-		root.setTop(resultSpace);
-		root.setCenter(cardSpace);
+		root.setRight(resultSpace);
+		root.setLeft(cardSpace);
 		root.setBottom(playerActionsBox);
 
 		Scene gameScene = new Scene(root, 850, 750);
