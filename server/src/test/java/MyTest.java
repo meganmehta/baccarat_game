@@ -215,7 +215,7 @@ class MyTest {
 			output = 20;
 		}
 		else{
-			output = 0;
+			output = -20;
 		}
 		assertEquals(output, testWinnings, "evaluateWinnings not working" );
 	}
@@ -232,7 +232,7 @@ class MyTest {
 			output = 50;
 		}
 		else{
-			output = 0;
+			output = -50;
 		}
 		assertEquals(output, testWinnings, "evaluateWinnings not working" );
 	}

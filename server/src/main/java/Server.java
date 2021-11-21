@@ -37,11 +37,9 @@ public class Server{
 
                     ClientThread c = new ClientThread(mysocket.accept(), count);
                     //if a new client joins the server.
-                    Thread.sleep(2000);
                     callback.accept("New client has connected to server: " + "Client #" + count);
                     clients.add(c);
                     //update the total number of clients connected to server
-                    Thread.sleep(2000);
                     callback.accept("Number of clients connected to server: " + clients.size()); //how many clients are connected to the server.
                     c.start();
 
@@ -89,40 +87,45 @@ public class Server{
             while(true) {
                 try {
                     BaccaratInfo gameInfo = (BaccaratInfo) in.readObject();
-                    String amount = String.valueOf(gameInfo.betAmount);
-                    //outputs message with client bet info - how much the a client bet on each game
-                    Thread.sleep(2000);
-                    callback.accept("Client #" + count + " bet $" +
-                            amount + " on " + gameInfo.userBetChoice);
-                    //plays game on backend + assign game variables to serializable variables
-                    game.setBetAmount(gameInfo.betAmount);
-                    game.setBetOn(gameInfo.userBetChoice);
-                    double winnings = game.evaluateWinnings();
-                    gameInfo.playerHand = game.playerHand;
-                    gameInfo.bankerHand = game.bankerHand;
-                    gameInfo.extraPlayerCard = game.playerECard;
-                    gameInfo.extraBankerCard = game.bankerECard;
-                    gameInfo.winner = game.winner;
-                    gameInfo.totalWinnings = game.totalWinnings;
-                    out.writeObject(gameInfo); //sends all game info to client
-
-                    // -------- SERVER MESSAGES --------
-                    //The results of each game played by any client.
-                    Thread.sleep(2000);
-                    callback.accept("Client #" + count + " Game Results: " + gameInfo.winner + " won!");
-                    //how much a client won or lost on each game
-                    if (gameInfo.userBetChoice == gameInfo.winner){
+                    if (gameInfo.newGame){
                         Thread.sleep(2000);
-                        callback.accept("Client #" + count + " won $" + gameInfo.betAmount + " on this game!");
+                        game = new BaccaratGame();
+                        callback.accept("Client # " + count + " is playing another hand.");
                     }
                     else{
+                        String amount = String.valueOf(gameInfo.betAmount);
+                        //outputs message with client bet info - how much the a client bet on each game
                         Thread.sleep(2000);
-                        callback.accept("Client #" + count + " lost $" + gameInfo.betAmount + " on this game.");
-                    }
-                    //is the client playing another hand.
-                    if (gameInfo.newGame == true){
+                        callback.accept("Client #" + count + " bet $" +
+                                amount + " on " + gameInfo.userBetChoice);
+                        //plays game on backend + assign game variables to serializable variables
+                        game.setBetAmount(gameInfo.betAmount);
+                        game.setBetOn(gameInfo.userBetChoice);
+                        System.out.println(gameInfo.userBetChoice);
+                        double winnings = game.evaluateWinnings();
+                        gameInfo.playerHand = game.playerHand;
+                        gameInfo.bankerHand = game.bankerHand;
+                        gameInfo.extraPlayerCard = game.playerECard;
+                        gameInfo.extraBankerCard = game.bankerECard;
+                        gameInfo.gameWinner = game.winner;
+                        System.out.println(gameInfo.gameWinner);
+                        gameInfo.totalWinnings = game.totalWinnings;
+                        out.writeObject(gameInfo); //sends all game info to client
+
+                        // -------- SERVER MESSAGES --------
+                        //The results of each game played by any client.
                         Thread.sleep(2000);
-                        callback.accept("Client # " + count + "is playing another hand.");
+                        callback.accept("Client #" + count + " Game Results: " + gameInfo.gameWinner + " won!");
+                        //how much a client won or lost on each game
+                        if (gameInfo.userBetChoice.equals(gameInfo.gameWinner)){
+                            Thread.sleep(2000);
+                            callback.accept("Client #" + count + " won $" + gameInfo.betAmount + " on this game!");
+                        }
+                        else {
+                            Thread.sleep(2000);
+                            callback.accept("Client #" + count + " lost $" + gameInfo.betAmount + " on this game.");
+                        }
+
                     }
 
                 }

@@ -39,7 +39,8 @@ public class BaccaratGame {
 			bankerHand.add(bankerECard);
 		}
 
-    	this.winner = logic.whoWon(playerHand, bankerHand);
+    	this.winner = logic.whoWon(this.playerHand, this.bankerHand);
+		System.out.println(this.winner);
 
 		//determine winnings
 		if (winner == "Player"){

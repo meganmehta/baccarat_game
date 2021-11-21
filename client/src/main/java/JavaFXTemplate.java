@@ -58,11 +58,12 @@ import javafx.scene.control.TextArea;
 
 public class JavaFXTemplate extends Application {
 	HashMap<String, Scene> sceneMap;
-	Button startBtn, connectBtn, exitBtn;//, playAgainBtn;
+	Button startBtn, connectBtn, exitBtn, playAgainBtn;
 	Stage primaryStage;
 	Scene introScene, gameScene;
 	Text welcome, playerWins;
 	ArrayList<Serializable> clientActions;
+	ArrayList<String> items;
 	ListView actions;
 	TextField t1, t2;
 	Label portNum, ipAddy, bidLab, bidDropLab, playSpace, bankSpace;
@@ -115,12 +116,15 @@ public class JavaFXTemplate extends Application {
 						//recast
 						BaccaratInfo recastGame = (BaccaratInfo)gameInfo;
 						clientActions.add(gameInfo); //adds everything from BaccaratInfo once the game has ran
-						userBetSelect = (String) recastGame.userBetChoice;
-						gameWinner = (String) recastGame.winner;
+						System.out.println("winner: " + recastGame.gameWinner);
+						items.add(recastGame.gameWinner.toString());
+						items.add(recastGame.userBetChoice.toString());
 					});
 				});
 				clientConnection.start();
 		}});
+
+		items = new ArrayList<String>();
 
 		VBox allStuff = new VBox(50, welcome, portNumberBox, ipBox, connectBtn);
 		allStuff.setAlignment(Pos.CENTER);
@@ -155,14 +159,17 @@ public class JavaFXTemplate extends Application {
 		results.setPrefWidth(50);
 		//display output message according to game results
 		//TO DO: find a way to keep track of how many wins a client has while playing
-		if (gameWinner != userBetSelect){
-			results.setText("Player Total: .. Banker Total:  ..." + "...."+ gameWinner +
-					" wins!" + ". Sorry, you bet" + userBetSelect + "! You lost your bet!");
+
+		//results.setText(items);
+		/*if (items.get(0).equals(items.get(1))){
+			results.setText("Player Total: .. Banker Total: ..." + "...." + items.get(0) +
+					" wins!" + ". Congrats, you bet" + items.get(1) + "! You win! ");
 		}
 		else{
-			results.setText("Player Total: .. Banker Total: ..." + "...." + gameWinner +
-					" wins!" + ". Congrats, you bet" + userBetSelect + "! You win! ");
-		}
+			results.setText("Player Total: .. Banker Total:  ..." + "...."+ items.get(0) +
+					" wins!" + ". Sorry, you bet" + items.get(1) + "! You lost your bet!");
+		}*/
+
 
 		VBox resultSpace = new VBox(10,result1, results);
 		resultSpace.setAlignment(Pos.TOP_CENTER);
@@ -223,7 +230,7 @@ public class JavaFXTemplate extends Application {
 		startBtn.setOnAction(event -> {
 			double betA = Double.valueOf(bid.getText());
 			BaccaratInfo gameInformation = new BaccaratInfo(betA, (String) bidDrop.getValue(),
-					null, null, null, null, null, null, 0);
+					null, null, null, null, null, false, 0);
 			clientConnection.send(gameInformation); //sends the choice of who the user bet on
 		});
 
@@ -232,18 +239,17 @@ public class JavaFXTemplate extends Application {
 			Platform.exit();
 		});
 
-		/*playAgainBtn = new Button("Play Again!");
+		playAgainBtn = new Button("Play Again!");
 		playAgainBtn.setOnAction(event -> {
 			this.primaryStage.setScene(createGameScene());
 			this.primaryStage.show();
 			//sends the choice of another game or not
-			Boolean playAnother = true;
 			BaccaratInfo gameInformation = new BaccaratInfo(0, null, null,
-					null, null, null, null, playAnother, 0);
+					null, null, null, null, true, 0);
 			clientConnection.send(gameInformation);
-		});*/
+		});
 
-		VBox gameControls = new VBox(10, startBtn, exitBtn);
+		VBox gameControls = new VBox(10, startBtn, exitBtn, playAgainBtn);
 		gameControls.setAlignment(Pos.TOP_CENTER);
 
 		//-----DISPLAY PLAYER WINNINGS------

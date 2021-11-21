@@ -9,7 +9,7 @@ public class BaccaratInfo implements Serializable{
     ArrayList<Card> bankerHand = new ArrayList<Card>();;
     Card extraPlayerCard;
     Card extraBankerCard;
-    String winner;
+    String gameWinner;
     Boolean newGame;
     double totalWinnings;
 
@@ -19,7 +19,7 @@ public class BaccaratInfo implements Serializable{
     public BaccaratInfo(double betAmount, String userBetChoice,
                         ArrayList<Card> playerHand, ArrayList<Card> bankerHand,
                         Card extraPlayerCard, Card extraBankerCard,
-                        String winner, Boolean newGame, double totalWinnings){
+                        String gameWinner, Boolean newGame, double totalWinnings){
 
         this.playerHand = playerHand;
         this.bankerHand = bankerHand;
@@ -27,7 +27,7 @@ public class BaccaratInfo implements Serializable{
         this.extraPlayerCard = this.extraPlayerCard;
         this.betAmount = betAmount;
         this.userBetChoice = userBetChoice;
-        this.winner = winner;
+        this.gameWinner = gameWinner;
         this.newGame = newGame;
         this.totalWinnings = totalWinnings;
     }

@@ -15,14 +15,17 @@ public class BaccaratGameLogic {
             result = "Draw";
         }
 
-        else if (bankerScore == 8 || bankerScore == 9){
+        else if (bankerScore == 8 || bankerScore == 9 || bankerScore > playerScore){
             result = "Banker";
         }
 
-        else if (playerScore == 8 || playerScore == 9){
+        else if (playerScore == 8 || playerScore == 9 || playerScore > bankerScore){
             result =  "Player";
         }
-        System.out.println(result);
+        else{
+            result = "Draw";
+        }
+        //System.out.println(result);
         return result;
 
     }
