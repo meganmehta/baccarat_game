@@ -160,8 +160,8 @@ public class JavaFXTemplate extends Application {
 						rec2.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/cards/" + p1card2FP))));
 
 						if (recastGame.playerHand.size() > 2){
-							p1c3Val += Integer.toString(recastGame.playerHand.get(0).value);
-							p1c3Suit += recastGame.playerHand.get(0).suit;
+							p1c3Val += Integer.toString(recastGame.playerHand.get(2).value);
+							p1c3Suit += recastGame.playerHand.get(2).suit;
 							System.out.println(p1c3Val);
 							p1card3FP = p1c3Val + p1c3Suit + ".jpg";
 							rec3.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/cards/" + p1card3FP))));
@@ -174,15 +174,15 @@ public class JavaFXTemplate extends Application {
 						b1card1FP = b1c1Val + b1c1Suit + ".jpg";
 						rec4.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/cards/" + b1card1FP))));
 
-						b1c2Val += Integer.toString(recastGame.bankerHand.get(0).value);
-						b1c2Suit += recastGame.bankerHand.get(0).suit;
+						b1c2Val += Integer.toString(recastGame.bankerHand.get(1).value);
+						b1c2Suit += recastGame.bankerHand.get(1).suit;
 						System.out.println(b1c2Val);
 						b1card2FP = b1c2Val + b1c2Suit + ".jpg";
 						rec5.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/cards/" + b1card2FP))));
 
 						if (recastGame.playerHand.size() > 2) {
-							b1c3Val += Integer.toString(recastGame.bankerHand.get(0).value);
-							b1c3Suit += recastGame.bankerHand.get(0).suit;
+							b1c3Val += Integer.toString(recastGame.bankerHand.get(2).value);
+							b1c3Suit += recastGame.bankerHand.get(2).suit;
 							System.out.println(b1c3Val);
 							b1card3FP = b1c3Val + b1c3Suit + ".jpg";
 							rec6.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/cards/" + b1card3FP))));
